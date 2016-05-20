@@ -1,0 +1,22 @@
+{
+             "options": {
+                  "multiple": true
+              },
+              "children": {
+                  "store_name": {},
+                  "store_price": {},
+                  "store_stock_amount": {},
+                  "store_in_stock": {
+                      "options": {
+                          "use_contains": true,
+                          "value": 999
+                      }
+                  },
+                  "store_not_in_stock": {
+                      "options": {
+                          "use_contains": true,
+                          "value": 0
+                      }
+                  }
+              }
+}

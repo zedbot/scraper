@@ -1,0 +1,14 @@
+{
+  "itemtype":"http://data-vocabulary.org/Breadcrumb",
+  "children": {
+	  "url": {
+      "itemprop":"url"
+	  },
+	  "title": {
+      "itemprop":"title"
+	  }
+  },
+  "options":{
+    "multiple":true
+  }
+}

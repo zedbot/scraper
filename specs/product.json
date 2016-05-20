@@ -1,0 +1,120 @@
+{
+  "itemtype":"//schema.org/Product",
+  "options": {
+    "multiple":"true"
+  },
+  "children": {
+		"url": {
+			"itemprop":"url"
+		},
+      "name": {
+        "itemprop":"name"
+      },
+      "offer":{
+		"itemprop":"offers",
+		"type":"offer"
+      },
+
+      "short_description": {},
+      "description": {
+        "itemprop":"description"
+      },
+      "sku": {
+        "itemprop":"sku"
+      },
+      "code": {
+        "itemprop":"mpn"
+      },
+      "model": {
+        "itemprop":"model"
+      },
+      "ean": {
+        "itemprop":"gtin13"
+      },
+      "color": {
+        "itemprop":"color"
+      },
+      "audience": {
+        "itemprop":"audience"
+      },
+      "category": {
+        "category":"category"
+      },
+      "manufacturer": {
+        "itemprop":"brand"
+      },
+      "manufacturer_logo": {
+        "itemprop":"logo"
+      },
+      "main_image": {
+        "itemprop":"image"
+      },
+      "condition": {
+        "itemprop":"itemCondition"
+      },
+      "productID": {
+        "itemprop":"productID"
+      },
+       "rating": {
+        "type":"rating",
+        "itemprop":"aggregateRating"
+      },
+      "additional_image": {
+          "options": {
+              "multiple": true
+          }
+      },
+	  "price": {
+    },
+	  "regular_price": {
+    },
+	  "price_in_strore": {
+    },
+	  "currency": {
+    },      
+	  "stock_amount": {
+    },      
+      "attribute_group": {
+          "options": {
+              "multiple": true
+          },
+          "children": {
+              "attribute_group_name": {},
+              "attribute": {
+                  "options": {
+                      "multiple": true
+                  },
+                  "children": {
+                      "attribute_name": {},
+                      "attribute_value": {},
+                      "attribute_unit": {}
+                  }
+              }
+          }
+      },
+          "store": {
+            "type":"store"
+          },
+	  "related": {
+		  "itemprop": "isRelatedTo",
+      "type": "product",
+          "options": {
+              "multiple": true
+          }     
+
+	  },
+	  "sub_products": {
+		  "type": "product",
+      "options": {
+          "multiple": true
+      }
+	  },
+	  "review": {
+		  "itemprop": "review",
+		  "type": "review",
+      "options": {
+          "multiple": true
+      }
+	  }            
+  }
+}

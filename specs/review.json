@@ -1,0 +1,22 @@
+{
+  "itemtype":"//schema.org/Review",
+  "options": {},
+  "children": {
+	  "author": {
+      "itemprop":"author"
+    },
+	  "date": {
+      "itemprop":"datePublished"
+    },
+	  "description": {
+      "itemprop":"description"
+    },
+    "rating": {
+      "itemprop":"reviewRating",
+      "type":"rating"
+    },
+	  "reviewBody": {
+      "itemprop":"reviewBody"
+    }
+  }
+}

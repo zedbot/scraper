@@ -1,0 +1,20 @@
+ {
+
+      "options": {
+        "skip_first": false,
+        "skip_last": false
+      },
+      "children": {
+        "breadcrumb": {
+          "selector": "a",
+          "options": {
+            "multiple": true,
+            "use_content": true
+          }
+        },
+        "breadcrumb-last": {}
+      },
+      "selector": ".active_category_background_blue",
+      "features": [],
+      "required": true
+    }

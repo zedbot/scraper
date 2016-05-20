@@ -1,0 +1,53 @@
+{
+        "itemtype":"http://schema.org/LocalBusiness",
+        "options":{  
+           "multiple":true
+        },
+        "children":{  
+           "name":{  
+              "itemprop":"name"
+
+           },
+           "description":{  
+              "itemprop":"description"
+
+           },
+           "image":{  
+              "itemprop":"image"
+
+           },         
+           "location":{  
+              "itemprop":"geo",
+              "type":"location"
+
+           },
+           "address":{  
+              "itemprop":"address",
+              "features":[  
+
+              ]
+           },
+           "open":{  
+              "itemprop":"openingHours",
+              "features":[  
+
+              ]
+           },
+           "phone":{  
+              "itemprop":"phone"
+
+           },
+           "email":{  
+              "itemprop":"email"
+           },
+           "closed":{  
+
+           },
+           "google_place":{  
+              "features":[  
+
+              ]
+           }
+        }
+  
+}

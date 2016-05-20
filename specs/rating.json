@@ -1,0 +1,22 @@
+{
+  "itemtype":"//schema.org/AggregateRating",
+  "options": {},
+  "children": {
+	  "ratingValue": {
+      "itemprop":"ratingValue"
+    },
+	  "reviewCount": {
+      "itemprop":"reviewCount"
+    },
+	  "bestRating": {
+      "itemprop":"bestRating"
+    },
+	  "worstRating": {
+      "itemprop":"worstRating"
+    },
+	  "itemReviewed": {
+	  	"type":"product"
+	  }
+	  
+  }
+}

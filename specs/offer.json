@@ -1,0 +1,32 @@
+{
+  "itemtype":"//schema.org/Offer",
+  "options": {},
+  "children": {
+	  "availability": {
+      "itemprop":"availability",
+      "options":{
+        "map":{"In Stock":999,"":0}
+      }
+    },
+	  "condition": {
+      "itemprop":"itemCondition"
+    },
+	  "price": {
+      "itemprop":"price"
+    },
+	  "currency": {
+      "itemprop":"priceCurrency"
+    },
+    "valid-until": {
+      "itemprop":"priceValidUntil"
+    },
+	  "itemOffered": {
+	  	"type":"product"
+	  },
+     "rating": {
+      "itemtype":"rating",
+      "type":"rating"
+    }  
+	  
+  }
+}
