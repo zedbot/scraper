@@ -1,8 +1,10 @@
-  var loadUI = function(jq, specs) {
-	  
+  var loadUI = function(specs) {
+  var jq = require('jquery');
+
 	var utils = require("./dom_utils.js");
 	var generateSelector = require("./selector.js");
-	console.log(utils);
+	var extractFieldBySelector = require("./extractor.js");
+	//console.log(utils);
 	
 function processNode(node) {
 	//var scopes = [[jq("body"), specs]];
@@ -156,15 +158,79 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
         //console.log("test");
         window.zedbot_matches = 0;
         window.zedbot_rulecount = 0;
-        extractFieldBySelector(specs, jq(window.document), product);
+        window.zedbot_data = {};
+        extractFieldBySelector(specs, jq(window.document), window.zedbot_data);
         //console.log(JSON.stringify(product, null, ' '));
         console.log("matches", window.zedbot_matches);
         console.log("rules", window.zedbot_rulecount);
         console.log("template", specs.template);
-        jq(".zedbot_tester").html('<pre>'+JSON.stringify(product, null, ' ')+'</pre>').show();
+        jq(".zedbot_tester").html('<pre>'+JSON.stringify(window.zedbot_data, null, ' ')+'</pre>').show();
         
         //console.log();
       }))
+	  .append(jq("<br>"))
+      .append(jq("<button id='zedbot_save'>save to localstorage</button>").click(function(){
+        //console.log("test");
+        window.zedbot_matches = 0;
+        window.zedbot_rulecount = 0;
+        window.zedbot_data = {};
+        extractFieldBySelector(specs, jq(window.document), window.zedbot_data);
+        //console.log(JSON.stringify(product, null, ' '));
+       // console.log("matches", window.zedbot_matches);
+       // console.log("rules", window.zedbot_rulecount);
+       // console.log("template", specs.template);
+       // jq(".zedbot_tester").html('<pre>'+JSON.stringify(window.zedbot_data, null, ' ')+'</pre>').show();
+          var all_data = JSON.parse(localStorage.getItem('zedbot_data') || "{}");
+          console.log(all_data);
+          all_data[window.zedbot_page_id] = window.zedbot_data;
+          console.log(JSON.stringify(all_data));
+          localStorage.setItem('zedbot_data',  JSON.stringify(all_data));
+
+        
+        //console.log();
+      }))
+	  .append(jq("<br>"))
+      .append(jq("<button id='zedbot_download'>dowload page</button>").click(function(){
+        //console.log("test");
+        window.zedbot_matches = 0;
+        window.zedbot_rulecount = 0;
+        window.zedbot_data = {};
+        extractFieldBySelector(specs, jq(window.document), window.zedbot_data);
+          var blob = new Blob(
+            [JSON.stringify(window.zedbot_data, null, ' ')],
+            {type: 'application/json;charset=utf-8'}
+          );
+          var oURL = URL.createObjectURL(blob);
+
+          var a = document.createElement('a');
+          a.href = oURL;
+          a.setAttribute('download', window.zedbot_page_id+".json");
+          a.click();
+          URL.revokeObjectURL(oURL);
+        
+        //console.log();
+      }))
+	  .append(jq("<br>"))
+      .append(jq("<button id='zedbot_download'>dowload all</button>").click(function(){
+        //console.log("test");
+        window.zedbot_matches = 0;
+        window.zedbot_rulecount = 0;
+        window.zedbot_data = {};
+          var blob = new Blob(
+            [JSON.stringify(JSON.parse(localStorage.getItem('zedbot_data') || "{}"), null, ' ')],
+            {type: 'application/json;charset=utf-8'}
+          );
+          var oURL = URL.createObjectURL(blob);
+
+          var a = document.createElement('a');
+          a.href = oURL;
+          a.setAttribute('download', localStorage.getItem("zedbot_dataset")/*TODO: +site_id */+".json");
+          a.click();
+          URL.revokeObjectURL(oURL);
+        
+        //console.log();
+      }))
+	  .append(jq("<div>----</div>"))
 	  .append(jq("<br>"))
       .append(jq("<button id='zedbot_edit'>edit script</button>").click(function(){
 		  jq(".zedbot_tester").html('<textarea id="zedbot_editor">'+JSON.stringify(specs, null, 2)+'</textarea>').show();
@@ -174,6 +240,16 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
           //extractFieldBySelector(specs, jq("html"), product);
           saveScript();        
       }))
+      .append(jq("<br>"))
+      .append(jq("<button id='zedbot_save'>download script</button>").click(function(){
+          //extractFieldBySelector(specs, jq("html"), product);
+          //downloadScript();       
+          var blob = new Blob(
+          [JSON.stringify(specs, null, 2)],
+          {type: 'application/json;charset=utf-8'}
+      );          
+      }))
+      
 	  /*
       .append(jq("<br>"))
 	  .append(jq("<span>Export: </span>"))

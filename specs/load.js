@@ -1,9 +1,5 @@
 function zedbot_loadspecs(jq, baseurl, callback){
 
-  
-  /*
-  console.log("load specs 2");
-
   jq.when(
     // list of arguments to "when" funcion
     jq.getJSON(baseurl + "product.json?"+new Date().getTime()),
@@ -35,7 +31,5 @@ function zedbot_loadspecs(jq, baseurl, callback){
   }
   
   );
-  */
 };
 
-module.exports = zedbot_loadspecs;
