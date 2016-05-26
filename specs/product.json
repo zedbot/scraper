@@ -55,7 +55,7 @@
       "productID": {
         "itemprop":"productID"
       },
-       "rating": {
+       "aggregateRating": {
         "type":"rating",
         "itemprop":"aggregateRating"
       },
@@ -73,6 +73,16 @@
 	  "currency": {
     },      
 	  "stock_amount": {
+    },      
+	  "in_stock": {
+	  "options": {
+	  "use_contains":true
+	  }
+    },      
+	  "not_in_stock": {
+	  	  "options": {
+	  "use_contains":true
+	  }
     },      
       "attribute_group": {
           "options": {

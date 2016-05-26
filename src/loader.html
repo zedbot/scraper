@@ -1,0 +1,80 @@
+   <html id="zedbot_scraper">
+    <head>
+      <style>
+        html,body {
+          margin:0;overflow:hidden;
+        } 
+        .zedbot_clearfix{
+          clear:both;
+        }
+        #zedbot_panel {
+          background:beige;
+          margin:2px;
+        }
+		#zedbot_panel .block {
+			float:left;
+		}
+        iframe{
+          border:0;
+          float:left;
+          clear:both;
+        }
+        button.disabled {
+          color: #aaa;
+        }
+      </style>
+      <script>
+        var dataset = localStorage.getItem("zedbot_dataset");
+        var mode = localStorage.getItem("zedbot_mode");
+        var endpoint = localStorage.getItem("zedbot_endpoint");
+      </script>
+    </head>
+    <body>
+      <div id="zedbot_panel" style="height:7%"> 
+       <div class="block scrape_mode">Dataset name:
+        <input id="zedbot_mode"></input>
+        <br>Dataset URL:
+        <input id="zedbot_endpoint" size="30" value="http://localhost:9200/pages/product/">  <input type="button" id="zedbot_set_mode" value="Go">
+        </div>
+	  <div class="block stats"></div>
+      <div class="zedbot_clearfix"></div>
+      </div>
+      <iframe width="100%" height="93%" id="zedbot_page" sandbox="allow-same-origin allow-scripts"></iframe>
+    </body>
+    <script>
+        console.log("localStorage",localStorage.getItem("zedbot_scraper"))
+            
+			var iframe = document.getElementById("zedbot_page");
+			iframe.setAttribute('src', location.href);
+			iframe.addEventListener('load', function(){
+
+				console.log("load", iframe.contentWindow.location);
+        window.history.pushState({},"", iframe.contentWindow.location);
+
+				iframe.contentWindow.onbeforeunload = function () {
+					console.log("unload", this);
+				};
+				iframe.contentWindow.document.addEventListener("load", function(event) {
+					console.log("loaded", this);
+				});        
+
+				if(dataset != null) {
+					var script = document.createElement( 'script' );
+					script.type = 'text/javascript';
+					script.src = localStorage.getItem("zedbot_scraper") + new Date().getTime();
+          script.id = "zedbot_scraper";
+					script.setAttribute('data-mode', mode);
+					script.setAttribute('data-dataset',dataset);
+					script.setAttribute('data-endpoint',endpoint);
+					iframe.contentWindow.document.getElementsByTagName('head')[0].appendChild(script);
+        }
+      });
+            
+			document.getElementById("zedbot_set_mode").addEventListener("click", function(e){
+				e.preventDefault();
+				dataset = document.getElementById("zedbot_mode").value;
+				iframe.contentWindow.location.reload();
+			});
+      
+    </script>
+  </html>
