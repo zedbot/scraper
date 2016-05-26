@@ -14,11 +14,14 @@ if($("#zedbot_scraper").length > 0) {
     localStorage.setItem("zedbot_mode", "iframe");
     localStorage.setItem("zedbot_dataset", conf.dataset);
     localStorage.setItem("zedbot_endpoint", conf.endpoint);
+    localStorage.setItem("zedbot_specs", conf.specs);
     
 	require('./loader.js')($("#zedbot_scraper").attr("src"));
     
 	console.log("----------------");
   } else if(mode == "iframe") {
-    
+	//require('./specs/load.js')($, {});
+	var specs = require("../specs/document.json");
+    require('./annotator.js')($, specs);
   }
 }

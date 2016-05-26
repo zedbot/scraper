@@ -1,0 +1,14 @@
+{
+	"selector": "html",
+	"children":{
+		"product": { "type": "product"},
+		"offer": { "type": "offer"},
+		"breadcrumb": { "type": "breadcrumb"},
+		"rating": { "type": "rating"},
+		"review": { "type": "review"},
+		"localbusiness": { "type": "localbusiness"},
+		"breadcrumbs": { "type": "breadcrumbs"},
+		"language": { "type": "language"},
+		"store": { "type": "store"},
+	}
+}

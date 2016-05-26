@@ -1,5 +1,9 @@
 /*
 */
+.zedbot_parser button, .zedbot_classifier ul, .zedbot_classifier li, .zedbot_classifier span{
+  /*all: unset ;*/
+  
+}
 
 .zedbot_parser {
   color:black;

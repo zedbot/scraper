@@ -9869,9 +9869,491 @@ return jQuery;
 },{}],3:[function(require,module,exports){
 var css = ".zedbot_parser{color:#000;padding:20px;position:fixed;top:40px;right:40px;z-index:9999;border:2px solid #000;background:#fefefe}.zedbot_tester{color:#000;padding:20px;position:fixed;bottom:40px;left:40px;top:40px;right:40px;z-index:99999;border:2px solid #000;background:#fefefe;display:none;overflow:auto}.zedbot_tester textarea{width:99%;height:99%}.zedbot_classifier{color:#000;padding:20px;position:absolute;z-index:99999;border:2px solid #000;background:#fefefe}.zedbot_classifier ul{list-style:disc;margin:0}.zedbot_classifier ul li{list-style:disc;margin:0 8px}.selected_features{border:1px solid green}.zedbot_product{border:1px solid red}.zedbot_description,.zedbot_short_description{border:1px solid #00f}.zedbot_name{border:1px solid #8a2be2}.zedbot_discount_price,.zedbot_price,.zedbot_regular_price{border:1px solid Brown}.zedbot_breadcrumbs,.zedbot_manufacturer{border:1px solid #5f9ea0}.zedbot_breadcrumb{border:1px solid #7fff00}.zedbot_main_image{border:1px solid #d2691e}.zedbot_additional_images{border:1px solid #6495ed}.zedbot_additional_image{border:1px solid #00008b}.zedbot_attribute_group{border:1px solid #f0f}.zedbot_attribute_group_name{border:1px solid #ff69b4}.zedbot_attribute{border:1px solid #cd5c5c}.zedbot_attribute_name{border:1px solid #f08080}.zedbot_attribute_value{border:1px solid #ffb6c1}.zedbot_currency,.zedbot_source_language{border:1px solid red}.zedbot_store_listing{border:1px solid #C00}.zedbot_store_in_stock{border:1px solid #3F6}.zedbot_shop_name,.zedbot_shop_type{border:1px solid red}.zedbot_ean{border:1px solid #6b8e23}.zedbot_sku{border:1px solid #ff4500}.zedbot_code{border:1px solid #00fa9a}.zedbot_shop_code,.zedbot_store,.zedbot_store_price,.zedbot_store_quantity{border:1px solid red}.zedbot_stock{border:1px solid brown}.zedbot_in_stock{border:1px solid green}.zedbot_link_name,.zedbot_link_type,.zedbot_link_url,.zedbot_links,.zedbot_not_in_stock,.zedbot_webshop_price,.zedbot_webshop_quantity,.zedbot_webshop_sku{border:1px solid red}.toggle-slide{overflow:hidden;cursor:pointer;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none;direction:ltr}.toggle-slide .toggle-blob,.toggle-slide .toggle-off,.toggle-slide .toggle-on{float:left}.toggle-slide .toggle-blob{position:relative;z-index:99;cursor:hand;cursor:-webkit-grab;cursor:-moz-grab;cursor:grab}.toggle-soft .toggle-slide{border-radius:5px;-webkit-box-shadow:0 0 0 1px #999;box-shadow:0 0 0 1px #999}.toggle-soft .toggle-off,.toggle-soft .toggle-on{color:rgba(0,0,0,.7);font-size:11px;text-shadow:1px 1px #fff}.toggle-soft .toggle-on,.toggle-soft .toggle-select .toggle-inner .active{background:-webkit-gradient(linear,left top,left bottom,from(#d2ff52),to(#91e842));background:-webkit-linear-gradient(#d2ff52,#91e842);background:linear-gradient(#d2ff52,#91e842)}.toggle-soft .toggle-off,.toggle-soft .toggle-select .toggle-on{background:-webkit-gradient(linear,left top,left bottom,from(#cfcfcf),to(#f5f5f5));background:-webkit-linear-gradient(#cfcfcf,#f5f5f5);background:linear-gradient(#cfcfcf,#f5f5f5)}.toggle-soft .toggle-blob{border-radius:4px;background:-webkit-gradient(linear,left top,left bottom,from(#cfcfcf),to(#f5f5f5));background:-webkit-linear-gradient(#cfcfcf,#f5f5f5);background:linear-gradient(#cfcfcf,#f5f5f5);-webkit-box-shadow:inset 0 0 0 1px #bbb,inset 0 0 0 2px #fff;box-shadow:inset 0 0 0 1px #bbb,inset 0 0 0 2px #fff}.toggle-soft .toggle-blob:hover{background:-webkit-gradient(linear,left top,left bottom,from(#e4e4e4),to(#f9f9f9));background:-webkit-linear-gradient(#e4e4e4,#f9f9f9);background:linear-gradient(#e4e4e4,#f9f9f9);-webkit-box-shadow:inset 0 0 0 1px #ddd,inset 0 0 0 2px #ddd;box-shadow:inset 0 0 0 1px #ddd,inset 0 0 0 2px #ddd}"; (require("browserify-css").createStyle(css, { "href": "scraper.css"})); module.exports = css;
 },{"browserify-css":1}],4:[function(require,module,exports){
+module.exports={
+	"selector": "html",
+	"children":{
+		"product": { "type": "product"},
+		"offer": { "type": "offer"},
+		"breadcrumb": { "type": "breadcrumb"},
+		"rating": { "type": "rating"},
+		"review": { "type": "review"},
+		"localbusiness": { "type": "localbusiness"},
+		"breadcrumbs": { "type": "breadcrumbs"},
+		"language": { "type": "language"},
+		"store": { "type": "store"},
+	}
+}
+},{}],5:[function(require,module,exports){
+  var loadUI = function(jq, specs) {
+	  
+	var utils = require("./dom_utils.js");
+	var generateSelector = require("./selector.js");
+	console.log(utils);
+	
+function processNode(node) {
+	//var scopes = [[jq("body"), specs]];
+	var parents = utils.getAllParents(node.parentNode, 5);
+	console.log("node", node, "parents", parents);
+	var classifierEl = jq(".zedbot_classifier ul");
+	classifierEl.html("");
+	////console.log(parents.length);
+  var scopes = [];
+  var sub_specs = specs.children;
+	for(var i = 0; i < parents.length; i++) {
+		//classifierEl.append(jq("<li/>").append(jq('<a/>').text(parents[i].nodeName+' ' + jq(parents[i]).context.className)));
+		var parent_scope = jq(parents[i]).data("zedbot_scope")
+		//console.log('parent scope', parent_scope, sub_specs);
+		if( parent_scope !== undefined) {
+      ////console.log(scope["children"][jq(parents[i]).data("zedbot_scope")]);
+			for(var k in sub_specs) {
+        //console.log("k",k);
+				if(k==parent_scope && sub_specs[k]["children"] != undefined) {
+					scopes.push(parent_scope);
+          sub_specs = sub_specs[k]["children"] ;
+				}
+			}
+		}
+	}
+	//console.log("scopes", scopes);
+
+	var features = []; //analyzeNodeWithParentsAndChildren(node);
+	//var selector = generateSelector(node,'',1);
+	
+	//console.log(node);
+	//console.log(jq(node));
+	var li = jq("<li/>");
+	//li.append(jq('<li/>').text(selector));	
+	
+	if(jq(node).data("zedbot_scope") == undefined && node.nodeName == "A") {
+		classifierEl.append(jq('<li class="zedbot_ignore_url"/>').text("ignore this url"));	
+		classifierEl.append(jq('<li class="zedbot_boost_url"/>').text("boost this url"));	
+	}
+	if(jq(node).data("zedbot_scope") !== undefined) {
+		li.append(jq('<a class="zedbot_clear_scope"/>').text("[x]"));	
+		li.append(jq('<a class="zedbot_combine_scope"/>').text("[c]"));	
+	}
+	classifierEl.append(li);
+	classifierEl.append(jq("<li class='zedbot_active_selector'>-</li>"));
+	var node_val = utils.getNodeValue(node);
+  if(jq(node).data("regex") !== undefined) {
+    var match = node_val.match(new RegExp(jq(node).data("regex")));
+    if(match != null) node_val = match[1];
+  }
+  
+	classifierEl.append('<li>[' + utils.truncate(node_val, 15,15,40)+']</li>');
+	classifierEl.append(jq("<li>===========</li>"));
+  printSpecs(specs.children, scopes, node, classifierEl, null);
+	/*
+	
+	//console.log('children');
+	var children = getAllChildren(node, 3);
+	//console.log(children);
+	classifierEl.append(jq("<li>-----------</li>"));
+	for(var i = 0; i < children.length; i++) {
+		classifierEl.append(jq("<li/>").append(jq('<a/>').text(children[i].nodeName+ ((children[i].nodeName[0]=="#")?'':(' ' + jq(children[i]).context.className)))));	
+	}
+	*/
+	
+  /*
+  var selector = "";
+  var cur_node = node;
+  for(var i = parents.length-1; i >= 0; i--) {
+    var parent = parents[i];
+    if( jq(cur_node).data("zedbot_scope") !== undefined) break;
+    if( cur_node.nodeName == 'body') break;
+    selector = generateSelector(cur_node, parent) + " > " + selector;
+    cur_node = parent;    
+  }
+  selector = selector.substr(0, selector.length - 3);
+  */
+	if(node.nodeName == "#text") {
+		jq(node).wrap('<LABEL class="textme selected_features"/>')
+	} else {
+		jq(node).addClass("selected_features");
+	}
+	jq(".selected_features")
+    .data("features", features)
+    //.data("selector", selector)
+    //.data("scope", scopes)
+    //.data("expected_value", node_val)
+  //console.log(jq(".selected_features"),jq(".selected_features").data("selector"))
+};  
+
+function printSpecs(specs, scopes, node, classifierEl, parent_scope){
+  //console.log("printSpecs", specs, scopes, classifierEl);
+  var scope = scopes.length > 0 ? scopes.shift() : null;
+		classifierEl.append(jq("<li>-----------</li>"));
+		for(var k in specs) {
+		//if(specs[k]["selector"] == undefined) {
+			var a = jq('<a/>').text(k);
+      if (k!=scope /*specs[k]["selector"]*/) a.addClass('zedbot_set_scope');
+
+			var multiple = specs[k]["options"] != undefined && specs[k]["options"]["multiple"] != undefined;
+			
+			var selector = generateSelector(node,'',1, multiple, parent_scope);
+			//classifierEl.append(jq("<li class='test_selector'>"+selector+"</li>"));
+			if(multiple) a.data("multiple", true);
+			a.data("selector", selector);
+			
+			a.data("parent_scope", parent_scope);
+			a.data("scope", specs[k]);
+      var newEl = jq("<li/>");
+      newEl.append(a);
+      if (k == scope) {
+        var childEl = jq("<ul/>");
+        printSpecs(specs[k].children, scopes, node, childEl, k);
+       // childEl.append(jq("<li>xxxxxxxxx</li>"));
+        newEl.append(childEl);
+        
+      }
+			classifierEl.append(newEl);	
+      
+		//}
+	}
+
+};
+
+
+	  
+  var lastNode = null;
+  var lastNodeSelected = null;
+  
+    //console.log('zedBot loaded' );
+
+    jq("<div/>")
+	.append(jq("<div/>")
+      .addClass('zedbot_parser')
+	  /*
+	  .append(jq("<span>Crawling: </span>"))
+	  .append(jq("<input type='checkbox' "+(specs.enabled == true ? 'checked=checked':'')+"'; class='toggle-soft' name='zedbot_enabled'/>").change(function(){
+			var exists = specs.enabled != null;
+			specs.enabled = this.checked;
+			saveScript();
+		}))
+	  .append(jq("<br>"))
+	  */
+//      .append(jq("<span>url:</span><span class='zedbot_url'>"+document.location.pathname+"</span><br/>"))
+//      .append(jq("<span>url:</span><span class='zedbot_url_match'>"+specs.url_match+"</span><br/>"))
+      //.append(jq("<span>Language:</span>"))
+	  //.append(jq("<select>").append("<option>et<option>en<option>ru").change(function(){  
+	  //}))
+	  .append(jq("<br>"))
+      .append(jq("<button id='zedbot_test'>test selectors</button>").click(function(){
+        //console.log("test");
+        window.zedbot_matches = 0;
+        window.zedbot_rulecount = 0;
+        extractFieldBySelector(specs, jq(window.document), product);
+        //console.log(JSON.stringify(product, null, ' '));
+        console.log("matches", window.zedbot_matches);
+        console.log("rules", window.zedbot_rulecount);
+        console.log("template", specs.template);
+        jq(".zedbot_tester").html('<pre>'+JSON.stringify(product, null, ' ')+'</pre>').show();
+        
+        //console.log();
+      }))
+	  .append(jq("<br>"))
+      .append(jq("<button id='zedbot_edit'>edit script</button>").click(function(){
+		  jq(".zedbot_tester").html('<textarea id="zedbot_editor">'+JSON.stringify(specs, null, 2)+'</textarea>').show();
+		}))
+      .append(jq("<br>"))
+      .append(jq("<button id='zedbot_save'>save script</button>").click(function(){
+          //extractFieldBySelector(specs, jq("html"), product);
+          saveScript();        
+      }))
+	  /*
+      .append(jq("<br>"))
+	  .append(jq("<span>Export: </span>"))
+	  .append(jq("<input type='checkbox' "+(specs.export.dev == true ? 'checked=checked':'')+"'; class='toggle-soft' name='zedbot_export_dev'/>").change(function(){
+			specs.export.dev = this.checked;
+			saveScript();
+		}))
+	  .append(jq("<span>Dev&nbsp;</span>"))        
+	  .append(jq("<input type='checkbox' "+(specs.export.live == true ? 'checked=checked':'')+"'; class='toggle-soft' name='zedbot_export_live'/>").change(function(){
+			specs.export.live = this.checked;
+			saveScript();
+		}))
+	  .append(jq("<span>Live&nbsp;</span><br>"))
+	  */
+	 )
+      .appendTo("body")
+  
+    //getStats(".zedbot_parser");
+
+    jq('<div/>')
+      .click(function(e){if(e.target == this) jq(this).hide()})
+      .addClass("zedbot_tester")
+      .appendTo("body")
+    
+    jq("<div/>")
+      .addClass('zedbot_classifier')
+      .append(jq("<ul>"))
+      .appendTo("body")
+       
+    jq("body").on("contextmenu", ".zedbot_url", function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+	 var sel = window.getSelection();
+      if(sel.type == 'Range') {
+        var range = window.getSelection().getRangeAt(0);
+        node = range.commonAncestorContainer;
+        if (node.parentNode == e.target) {
+            var text = node.textContent.trim();
+            var regex = text.substr(0, range.startOffset) + "(.*)" + text.substr(range.endOffset+1, text.length);
+            jq(".zedbot_url_match").text('^'+regex+'$');
+          }
+        }
+	})
+	
+    jq("body").contextmenu(function(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      if(e.button != 2) return false;
+      //console.log(e);
+      while(jq(".textme").length>0) {
+        jq(jq(".textme")[0].firstChild).unwrap();
+      } 
+      jq(".selected_features").removeClass("selected_features");
+      
+      jq(".zedbot_classifier").css({
+        top: e.pageY,
+        left: e.pageX
+      }).show();
+      ////console.log(e);
+      var sel = window.getSelection();
+      var node = null;
+      if(sel.type == 'Range') {
+        var range = window.getSelection().getRangeAt(0);
+        node = range.commonAncestorContainer;
+        
+        //console.log("Range", node, range);
+        if (node.nodeName == "#text") {
+          if(node.parentNode.childNodes.length == 1) {
+            //console.log("I'm here");
+            var regex = node.data.substr(0, range.startOffset)+"(.*)"+node.data.substr(range.endOffset);
+            node = node.parentNode;
+            jq(node).data("regex", regex);
+            //console.log("regex", regex)
+          } else {
+            var text = node.data.substr(range.startOffset, range.endOffset).trim();
+            var parenttext = node.parentNode.textContent.trim();
+            var start = parenttext.indexOf(text);
+            var regex = parenttext.substr(0, start)+"(.*)";
+            node = node.parentNode;
+            jq(node).data("regex", regex);
+            //console.log("regex", regex)
+          }
+        }
+      } else {
+        node = e.target;
+      }
+      if(node == lastNodeSelected) {
+        node = lastNode.parentNode;
+      } else {
+        lastNodeSelected = node;
+      }
+      lastNode = node;
+      processNode(node);
+    });
+    jq(document).on("keyup", "#zedbot_editor", function(e){
+			jq(this).css({border: "3px solid gray"});
+      try{
+        specs = JSON.parse(jq(this).val());		
+        jq(this).css({border: "3px solid green"});
+      }catch(e) {
+        jq(this).css({border: "3px solid red"});			
+      }
+		
+    });
+    jq(document).on("click", ".zedbot_clear_scope", function(e){
+      var e = jq(".selected_features");
+      var field = e.data("zedbot_scope");
+      e.removeClass("zedbot_"+field).removeData("zedbot_scope");
+      var _scope =  jq(".selected_features").data("scope");
+      delete  _scope["children"][field]["selector"];
+      delete  _scope["children"][field]["features"];
+      delete  _scope["children"][field]["options"]["regex"];
+      jq(".zedbot_classifier").hide();
+    })
+    jq(document).on("click", ".zedbot_combine_scope", function(e){
+      var field = e.data("zedbot_scope");
+      //console.log(field);
+      var _scope =  jq(".selected_features").data("scope");
+      //console.log(jq(".selected_features").data("regex"));
+      //console.log(_scope["children"][field]["options"]["regex"] = jq(".selected_features").data("regex"));
+    });
+
+    jq(document).on("mouseover", ".zedbot_set_scope", function(e){
+		//console.log(jq(e.target).data('selector'));
+		jq('.zedbot_active_selector').html(jq(e.target).data('selector'));
+	});
+    jq(document).on("click", ".zedbot_set_scope", function(e){
+      var field = jq(e.target).text();
+      //console.log(field);
+      var node = jq(".selected_features")
+			node.addClass("zedbot_"+field)
+		  .attr("title", field)
+          .data("zedbot_scope", field)
+          .data("zedbot_spec", jq(e.target).data('spec'));
+          
+		var _scope = jq(e.target).data("scope");
+		var selector = jq(e.target).data('selector');
+        if(_scope["options"] && _scope["options"]["multiple"] == true) {
+          var s = selector.lastIndexOf(":nth-child(");
+          var v = selector.lastIndexOf(")");
+          selector = selector.substr(0, s) + selector.substr(v+1, selector.length);
+        }
+        if(_scope["options"] && _scope["options"]["use_contains"] == true) {
+          selector = selector.trim() + ":contains(" + jq(".selected_features").text().trim() + ")";
+        }
+        _scope["selector"] =  selector;
+        _scope["features"] =  jq(".selected_features").data("features");
+		if (jq(".selected_features").data("regex") != undefined) {
+      if (_scope["options"] == undefined) {
+        _scope["options"] = {};
+      }
+			_scope["options"]["regex"] =  jq(".selected_features").data("regex");
+		}
+        //_scope["expected_value"] =  jq(".selected_features").data("expected_value");
+		if(_scope["options"] && _scope["options"]["textify"] != undefined) {
+      	textifyNode(node, _scope["options"]["textify"]);
+		}
+		if(_scope["options"] && _scope["options"]["unflattenn"] != undefined) {
+			unflattenNode(node, _scope["options"]["unflattenn"]);
+		}
+			
+        jq(".zedbot_classifier").hide();
+        
+    });
+    jq(document).on("click", ".zedbot_ignore_url,.zedbot_boost_url", function(e){
+			var node = jq(".selected_features")
+			var path = getPath(node[0]);
+    
+			//specs.ignore_urls = jq.unique(specs.ignore_urls);
+			jq(".zedbot_classifier").hide();
+    });	
+  }
+  
+ module.exports = loadUI
+},{"./dom_utils.js":6,"./selector.js":10}],6:[function(require,module,exports){
+var jq = require('jquery');
+
+var DomUtils = {
+	getAllParents: function(node, depth) {
+		////console.log(node.parentNode);
+		if(!node.parentNode /*|| depth == 0*/) return null;
+		if(node.className == "textme") return [node.parentNode]; 
+		var parents = DomUtils.getAllParents(node.parentNode, depth - 1);
+		if(!parents) return [node.parentNode.documentElement];
+
+		parents.push(node);
+		return parents;
+	},
+
+	getAllChildren: function(node, depth) {
+		////console.log(node.parentNode);
+		if(!node.hasChildNodes() || depth == 0) return null;
+		var all_children = [];
+		for(var i=0;i<node.childNodes.length;i++) {
+			all_children.push(node.childNodes[i]);
+			var children = this.getAllChildren(node.childNodes[i], depth - 1);
+			if(children == null) continue;
+			for(var j=0;j<children.length;j++) {
+				all_children.push(children[j]);
+			}
+		}
+		
+		//if(!parents) return [node.parentNode];
+		//children.push(node);
+		return all_children;
+	},
+	getNodeValueSimple: function(node) {
+		if(node.nodeName == "#text") {
+			return node.data;
+		} else if(node.hasAttribute("content")) {
+			return jq(node).attr("content");
+		} else if(node.nodeName == "IMG") {
+			var src =  jq(node).attr("src");
+			return jq("<a href='"+src+"'/>").get(0).href; // get full url
+		} else if(node.nodeName == "A") {
+			var href = jq(node).get(0).href;
+			href = jq("<a href='"+href+"'/>").get(0).href; // get full url
+			if(specs.session_name != undefined) {
+				//console.log(">>>>>>>", specs.session_name, "/&"+specs.session_name+"=[^&]+/gmi")
+				href = href.replace(new RegExp("&abcantenn=[^&]+"), "");
+				//console.log(href);
+			}
+			return href;
+		} else if(node.nodeName == "LINK") {
+			return jq(node).attr("href");
+		} else {
+			return jq(node).html().trim();
+		}
+	},
+	
+	getNodeValue: function(node, options) {
+		if (options == undefined) options = {};
+		var val = null;
+		if(typeof node == typeof "") {
+		  val = node
+		} else if(options.use_content !== undefined) {	
+			val = jq(node).text().trim();
+		} else if (options.use_attribute !== undefined) {	
+			val = jq(node).attr(options.use_attribute);
+		} else if (options.value !== undefined) {	
+            val = options.value;
+		} else {
+			val = this.getNodeValueSimple(node);
+		}
+		
+		if(options.regex !== undefined) {
+			var patt = new RegExp(options.regex,"gm");
+			try {
+				val =  patt.exec(val)[1];
+			} catch(e){
+				//console.log("Regex "+options.regex+" does not match " + val);
+				val = null;
+			};
+		}
+		if(options.allowed_tags !== undefined) {	
+      //console.log("zzzzzzzz", jq(options.allowed_tags, node));
+			val = jq(options.allowed_tags, node).html().trim();
+		}
+		if(options.replace !== undefined) {	
+			val = val.replace(options.replace[0], options.replace[1]);
+		}
+		if(options.map !== undefined) {	
+			console.log("["+val+"]");
+			if(val in options.map)
+				val = options.map[val];
+			else if("" in options.map)
+				val = options.map[""];
+		}
+		if(options.format !== undefined) {	
+			val = options.format.replace("[value]", val);
+		}
+		
+		if(options.normalize_url !== undefined) {	
+			val = jq("<a href='"+val+"'/>").get(0).href;
+		}
+		
+		return val;
+		
+	},
+	
+	truncate: function(text, startChars, endChars, maxLength) {
+      if (text.length > maxLength) {
+          var start = text.substring(0, startChars);
+          var end = text.substring(text.length - endChars, text.length);
+          return start + '...' + end;
+      }
+      return text;
+  }
+}
+module.exports = DomUtils;
+},{"jquery":2}],7:[function(require,module,exports){
 module.exports = "<html id=\"zedbot_scraper\"><head><style>\r\n        html,body {\r\n          margin:0;overflow:hidden;\r\n        } \r\n        .zedbot_clearfix{\r\n          clear:both;\r\n        }\r\n        #zedbot_panel {\r\n          background:beige;\r\n          margin:2px;\r\n        }\r\n\t\t#zedbot_panel .block {\r\n\t\t\tfloat:left;\r\n\t\t}\r\n        iframe{\r\n          border:0;\r\n          float:left;\r\n          clear:both;\r\n        }\r\n        button.disabled {\r\n          color: #aaa;\r\n        }\r\n      </style><script>\r\n        var dataset = localStorage.getItem(\"zedbot_dataset\");\r\n        var mode = localStorage.getItem(\"zedbot_mode\");\r\n        var endpoint = localStorage.getItem(\"zedbot_endpoint\");\r\n      </script></head><body><div id=\"zedbot_panel\" style=\"height:7%\"><div class=\"block scrape_mode\">Dataset name: <input id=\"zedbot_mode\"></input><br>Dataset URL: <input id=\"zedbot_endpoint\" size=\"30\" value=\"http://localhost:9200/pages/product/\"> <input type=\"button\" id=\"zedbot_set_mode\" value=\"Go\"></div><div class=\"block stats\"></div><div class=\"zedbot_clearfix\"></div></div><iframe width=\"100%\" height=\"93%\" id=\"zedbot_page\" sandbox=\"allow-same-origin allow-scripts\"></iframe></body><script>\r\n        console.log(\"localStorage\",localStorage.getItem(\"zedbot_scraper\"))\r\n            \r\n\t\t\tvar iframe = document.getElementById(\"zedbot_page\");\r\n\t\t\tiframe.setAttribute('src', location.href);\r\n\t\t\tiframe.addEventListener('load', function(){\r\n\r\n\t\t\t\tconsole.log(\"load\", iframe.contentWindow.location);\r\n        window.history.pushState({},\"\", iframe.contentWindow.location);\r\n\r\n\t\t\t\tiframe.contentWindow.onbeforeunload = function () {\r\n\t\t\t\t\tconsole.log(\"unload\", this);\r\n\t\t\t\t};\r\n\t\t\t\tiframe.contentWindow.document.addEventListener(\"load\", function(event) {\r\n\t\t\t\t\tconsole.log(\"loaded\", this);\r\n\t\t\t\t});        \r\n\r\n\t\t\t\tif(dataset != null) {\r\n\t\t\t\t\tvar script = document.createElement( 'script' );\r\n\t\t\t\t\tscript.type = 'text/javascript';\r\n\t\t\t\t\tscript.src = localStorage.getItem(\"zedbot_scraper\") + new Date().getTime();\r\n          script.id = \"zedbot_scraper\";\r\n\t\t\t\t\tscript.setAttribute('data-mode', mode);\r\n\t\t\t\t\tscript.setAttribute('data-dataset',dataset);\r\n\t\t\t\t\tscript.setAttribute('data-endpoint',endpoint);\r\n\t\t\t\t\tiframe.contentWindow.document.getElementsByTagName('head')[0].appendChild(script);\r\n        }\r\n      });\r\n            \r\n\t\t\tdocument.getElementById(\"zedbot_set_mode\").addEventListener(\"click\", function(e){\r\n\t\t\t\te.preventDefault();\r\n\t\t\t\tdataset = document.getElementById(\"zedbot_mode\").value;\r\n\t\t\t\tiframe.contentWindow.location.reload();\r\n\t\t\t});\r\n      \r\n    </script></html>";
 
-},{}],5:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 "use strict";
 var replace = function(script){
   console.log("script",script);
@@ -9885,7 +10367,7 @@ var replace = function(script){
 }
 
 module.exports = replace
-},{"./loader.html":4}],6:[function(require,module,exports){
+},{"./loader.html":7}],9:[function(require,module,exports){
 "use strict";
 var css = require('../scraper.css');
 //var scraper = require('scraper.js');
@@ -9902,13 +10384,153 @@ if($("#zedbot_scraper").length > 0) {
     localStorage.setItem("zedbot_mode", "iframe");
     localStorage.setItem("zedbot_dataset", conf.dataset);
     localStorage.setItem("zedbot_endpoint", conf.endpoint);
+    localStorage.setItem("zedbot_specs", conf.specs);
     
 	require('./loader.js')($("#zedbot_scraper").attr("src"));
     
 	console.log("----------------");
   } else if(mode == "iframe") {
-    
+	//require('./specs/load.js')($, {});
+	var specs = require("../specs/document.json");
+    require('./annotator.js')($, specs);
   }
 }
 
-},{"../scraper.css":3,"./loader.js":5,"jquery":2}]},{},[6]);
+},{"../scraper.css":3,"../specs/document.json":4,"./annotator.js":5,"./loader.js":8,"jquery":2}],10:[function(require,module,exports){
+var generateSelector =   function(node, childSelector, itemCount, multiple, _parent) {
+  
+var jq = require('jquery');
+
+    var parent = node.parentNode;    
+    var selector = null
+
+    if( typeof jq(node).data("zedbot_scope") !== 'undefined') {
+      return childSelector;
+    }
+	    if (node == _parent || parent == document) return childSelector;
+/*
+	if(selector == null && childSelector.length > 0 && childSelector[0] != '>') {
+		// no need for parent
+		var _selector = childSelector;
+		if ( jq(_selector, parent).length == 1)  {
+			return generateSelector(parent, childSelector, itemCount);;
+		}
+	}
+*/	
+    /*
+    if(selector == null) {
+      var _selector = '>' + node.nodeName + ' ' + childSelector;
+	  //console.log(jq(_selector, parent));
+	  var l = jq(_selector, parent).length;
+      if (l == 1)  {
+        selector = _selector;
+      }
+    }
+    */
+    
+     if(selector == null && node.id != "" && node.id.match(/[0-9]/) == null) {
+      var _selector = '>' + node.nodeName + '#'+node.id+' ' + childSelector;
+	  //console.log(jq(_selector, parent));
+	  var l = jq(_selector, parent).length;
+      if (l == itemCount)  {
+        selector = _selector;
+      }
+    }
+   
+    if(selector == null) {
+      // try classname
+      if(node.classList.length > 0) {
+        for(var j=0; j<node.classList.length;j++) { 
+          var _selector = '>' + node.nodeName + '.'+node.classList[j] + ' ' + childSelector;
+          if (jq(_selector, parent).length == itemCount) {
+            selector =  _selector;
+          }
+        }
+      }
+      
+      if(selector == null) {
+        // try attributes
+        var attributes = ['itemtype','itemprop','rel','data'];
+        for (var k=0; k<attributes.length;k++) {
+			if(node.hasAttribute(k)){
+				var _selector = ' > ' + node.nodeName + '['+attributes[k]+'="'+node.getAttribute(k)+'"]' + ' ' + childSelector;
+				//console.log(_selector);
+				if (jq(_selector, parent).length == itemCount) {
+				  selector =  _selector;
+				  break;
+				}
+			}
+        }
+      }
+     if(selector == null) {
+      var _selector = ' > ' + node.nodeName + ' ' + childSelector;
+	  //console.log(jq(_selector, parent));
+	  var l = jq(_selector, parent).length;
+      if (l == itemCount)  {
+        selector = _selector;
+      }
+    }
+     
+      if(selector == null) {
+        // try attributes with values
+        //...
+      }      
+      // try regex
+      if(selector == null && jq(node).data("regex") != undefined) {
+        var fixed_part = jq(node).data("regex").replace("(.*)",""); // TODO: fix (.*)
+        var _selector = '>' + node.nodeName + ":contains('"+fixed_part+"')" + ' ' + childSelector;
+          if (jq(_selector, parent).length == itemCount) {
+            selector = _selector;
+          }
+      }
+      if(selector == null) {
+        // try node index
+        var nodeIndex = -1;
+        var nodes = jq('>'+node.nodeName, parent);
+        //console.log("x", nodes);
+        for(var k=0;k< nodes.length;k++) {
+          if(nodes[k] == node){
+            nodeIndex = k;
+          }
+        }
+        if(nodeIndex > -1) {
+          // special case first - data in two column
+          if(node.nodeName == 'TD' && nodeIndex == 1 && jq(node.parentNode).data('zedbot-scope') == undefined) {
+            field = jq("td:first", parent).text().trim();
+            if(field.length < 200) {
+              selector = '>' + "TR:contains("+field+") > TD:nth-child(2)" + ' ' + childSelector;
+              parent = node.parentNode.parentNode;
+            }
+          }
+          if(selector == null && nodes.length > 1) {
+            var m = nodeIndex+1;
+            var multiple = false;
+            for(var k=0;k< nodes.length;k++) {
+              if (k==nodeIndex) continue;
+              //console.log("multiple", k, nodeIndex, nodes[k], jq(childSelector, nodes[k]).length);
+              var sibling_matches = jq(childSelector, nodes[k]).length;
+              if (sibling_matches > 0) {
+                  multiple = true;
+                  itemCount += sibling_matches;
+              }
+            }
+            //console.log("multiple",multiple);
+            if (multiple)
+              selector = '>' + node.nodeName + ' ' + childSelector;
+            else
+              selector = '>' + node.nodeName + ":nth-child("+m+")" + ' ' + childSelector;
+            
+          }
+          if(selector == null){
+            throw node;
+          }
+        }
+      }
+    }
+	//console.log("selector", selector);
+	return generateSelector(parent, selector, itemCount, multiple, _parent);
+
+  }
+
+module.exports = generateSelector;
+},{"jquery":2}]},{},[9]);
