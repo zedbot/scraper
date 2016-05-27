@@ -1,0 +1,617 @@
+{  
+   "children":{  
+      "document":{  
+         "selector":"html",
+         "children":{  
+            "product":{  
+               "itemtype":"//schema.org/Product",
+               "options":{  
+                  "multiple":"true"
+               },
+               "children":{  
+                  "url":{  
+                     "itemprop":"url"
+                  },
+                  "name":{  
+                     "itemprop":"name",
+                     "selector":"H1 ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "offer":{  
+                     "itemprop":"offers",
+                     "type":"offer",
+                     "selector":">DIV#mod110 >DIV.prod_in  > FORM >DIV.shop_prod__price ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "textify":true
+                     },
+                     "required":true,
+                     "children":{  
+                        "availability":{  
+                           "itemprop":"availability",
+                           "options":{  
+                              "map":{  
+                                 "In Stock":999,
+                                 "":0
+                              }
+                           }
+                        },
+                        "condition":{  
+                           "itemprop":"itemCondition"
+                        },
+                        "price":{  
+                           "itemprop":"price",
+                           "selector":">SPAN.zedbot_text ",
+                           "features":[  
+
+                           ],
+                           "options":{  
+
+                           },
+                           "required":true
+                        },
+                        "currency":{  
+                           "selector":"'EUR'"
+                        },
+                        "valid-until":{  
+                           "itemprop":"priceValidUntil"
+                        },
+                        "itemOffered":{  
+                           "type":"product"
+                        },
+                        "rating":{  
+                           "itemtype":"rating",
+                           "type":"rating"
+                        }
+                     },
+                     "itemtype":"//schema.org/Offer"
+                  },
+                  "short_description":{  
+
+                  },
+                  "description":{  
+                     "itemprop":"description",
+                     "selector":"DIV.prod_in__text ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "sku":{  
+                     "itemprop":"sku",
+                     "selector":">DIV >DIV >DIV >TABLE TBODY >TR:contains('ID:') TD.value ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "code":{  
+                     "itemprop":"mpn"
+                  },
+                  "model":{  
+                     "itemprop":"model"
+                  },
+                  "ean":{  
+                     "itemprop":"gtin13"
+                  },
+                  "color":{  
+                     "itemprop":"color"
+                  },
+                  "audience":{  
+                     "itemprop":"audience"
+                  },
+                  "category":{  
+                     "category":"category"
+                  },
+                  "manufacturer":{  
+                     "itemprop":"brand",
+                     "selector":"tr:contains(Tootja:) .value",
+                     "features":[  
+
+                     ]
+                  },
+                  "manufacturer_logo":{  
+                     "itemprop":"logo"
+                  },
+                  "main_image":{  
+                     "itemprop":"image",
+                     "required":true,
+                     "selector":"DIV.prod_in >DIV.prod_in__pic  > A ",
+                     "features":[  
+
+                     ]
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "productID":{  
+                     "itemprop":"productID"
+                  },
+                  "rating":{  
+                     "type":"rating",
+                     "itemprop":"aggregateRating"
+                  },
+                  "additional_image":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "selector":">DIV#mod110 >DIV.prod_in >DIV.prod_in__pic  > UL >LI  > A ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "price":{  
+                     "features":[  
+
+                     ]
+                  },
+                  "regular_price":{  
+                     "options":{  
+
+                     },
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "price_in_strore":{  
+
+                  },
+                  "currency":{  
+                     "selector":".prod_in SPAN ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "value":"EUR"
+                     },
+                     "required":true
+                  },
+                  "stock_amount":{  
+                     "selector":"TD.help_place ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":"([0-9.]+) (tk|pc|шт)"
+                     },
+                     "required":true
+                  },
+                  "attribute_group":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "attribute_group_name":{  
+
+                        },
+                        "attribute":{  
+                           "options":{  
+                              "multiple":true
+                           },
+                           "children":{  
+                              "attribute_name":{  
+                                 "selector":"TD.name ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_value":{  
+                                 "selector":"TD.value ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_unit":{  
+
+                              }
+                           },
+                           "selector":"TR ",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        }
+                     },
+                     "selector":".prod_in__info--data TABLE ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "store":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "store_name":{  
+                           "selector":"STRONG ",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        },
+                        "store_price":{  
+
+                        },
+                        "store_stock_amount":{  
+                           "selector":"TD.l_value ",
+                           "features":[  
+
+                           ],
+                           "options":{  
+                              "regex":"([0-9.]+)tk"
+                           },
+                           "required":true
+                        },
+                        "store_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":999
+                           }
+                        },
+                        "store_not_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":0
+                           }
+                        }
+                     },
+                     "selector":"DIV.prod_in_store__list tr:has(td.l_name) ",
+                     "required":true
+                  },
+                  "related":{  
+                     "itemprop":"isRelatedTo",
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "sub_products":{  
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "review":{  
+                     "itemprop":"review",
+                     "type":"review",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "discount_price":{  
+                     "selector":".shop_prod__price ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":"^([0-9.]+)"
+                     },
+                     "required":true
+                  },
+                  "in_stock":{  
+                     "options":{  
+                        "use_contains":true,
+                        "value":999
+                     }
+                  },
+                  "not_in_stock":{  
+                     "options":{  
+                        "use_contains":true,
+                        "value":0
+                     }
+                  },
+                  "stock":{  
+                     "children":{  
+                        "in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "regex":"([0-9]+) tk"
+                           }
+                        },
+                        "not_in_stock":{  
+                           "options":{  
+                              "use_contains":true
+                           }
+                        },
+                        "stock_amount":{  
+                           "features":[  
+
+                           ],
+                           "options":{  
+                              "regex":"([0-9]+) tk"
+                           },
+                           "selector":"TD.help_place "
+                        }
+                     },
+                     "features":[  
+
+                     ]
+                  },
+                  "store_listing":{  
+                     "children":{  
+                        "store":{  
+                           "options":{  
+                              "multiple":true
+                           },
+                           "children":{  
+                              "store_name":{  
+
+                              },
+                              "store_price":{  
+
+                              },
+                              "store_stock":{  
+
+                              }
+                           }
+                        },
+                        "store_in_stock":{  
+                           "options":{  
+                              "multiple":true
+                           }
+                        }
+                     }
+                  },
+                  "sub_product":{  
+
+                  },
+                  "reviews":{  
+                     "children":{  
+                        "review":{  
+                           "options":{  
+                              "multiple":true
+                           },
+                           "children":{  
+                              "ranking":{  
+
+                              },
+                              "author":{  
+
+                              },
+                              "date":{  
+
+                              },
+                              "message":{  
+
+                              },
+                              "title":{  
+
+                              }
+                           }
+                        }
+                     }
+                  }
+               },
+               "features":[  
+
+               ],
+               "selector":"DIV.center_box__right:has(.prod_in)",
+               "required":true
+            },
+            "offer":{  
+               "itemtype":"//schema.org/Offer",
+               "options":{  
+
+               },
+               "children":{  
+                  "availability":{  
+                     "itemprop":"availability",
+                     "options":{  
+                        "map":{  
+                           "In Stock":999,
+                           "":0
+                        }
+                     }
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "price":{  
+                     "itemprop":"price"
+                  },
+                  "currency":{  
+                     "itemprop":"priceCurrency"
+                  },
+                  "valid-until":{  
+                     "itemprop":"priceValidUntil"
+                  },
+                  "itemOffered":{  
+                     "type":"product"
+                  },
+                  "rating":{  
+                     "itemtype":"rating",
+                     "type":"rating"
+                  }
+               }
+            },
+            "breadcrumb":{  
+               "itemtype":"http://data-vocabulary.org/Breadcrumb",
+               "children":{  
+                  "url":{  
+                     "itemprop":"url"
+                  },
+                  "title":{  
+                     "itemprop":"title"
+                  }
+               },
+               "options":{  
+                  "multiple":true
+               }
+            },
+            "rating":{  
+               "itemtype":"//schema.org/AggregateRating",
+               "options":{  
+
+               },
+               "children":{  
+                  "ratingValue":{  
+                     "itemprop":"ratingValue"
+                  },
+                  "reviewCount":{  
+                     "itemprop":"reviewCount"
+                  },
+                  "bestRating":{  
+                     "itemprop":"bestRating"
+                  },
+                  "worstRating":{  
+                     "itemprop":"worstRating"
+                  },
+                  "itemReviewed":{  
+                     "type":"product"
+                  }
+               }
+            },
+            "review":{  
+               "itemtype":"//schema.org/Review",
+               "options":{  
+
+               },
+               "children":{  
+                  "author":{  
+                     "itemprop":"author"
+                  },
+                  "date":{  
+                     "itemprop":"datePublished"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "rating":{  
+                     "itemprop":"reviewRating",
+                     "type":"rating"
+                  },
+                  "reviewBody":{  
+                     "itemprop":"reviewBody"
+                  }
+               }
+            },
+            "localbusiness":{  
+               "itemtype":"http://schema.org/LocalBusiness",
+               "options":{  
+                  "multiple":true
+               },
+               "children":{  
+                  "name":{  
+                     "itemprop":"name"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "image":{  
+                     "itemprop":"image"
+                  },
+                  "location":{  
+                     "itemprop":"geo",
+                     "type":"location"
+                  },
+                  "address":{  
+                     "itemprop":"address",
+                     "features":[  
+
+                     ]
+                  },
+                  "open":{  
+                     "itemprop":"openingHours",
+                     "features":[  
+
+                     ]
+                  },
+                  "phone":{  
+                     "itemprop":"phone"
+                  },
+                  "email":{  
+                     "itemprop":"email"
+                  },
+                  "closed":{  
+
+                  },
+                  "google_place":{  
+                     "features":[  
+
+                     ]
+                  }
+               }
+            },
+            "breadcrumbs":{  
+               "breadcrumbs":{  
+                  "options":{  
+                     "skip_first":false,
+                     "skip_last":false
+                  },
+                  "children":{  
+                     "breadcrumb":{  
+                        "selector":"a",
+                        "options":{  
+                           "multiple":true,
+                           "use_content":true
+                        }
+                     },
+                     "breadcrumb-last":{  
+
+                     }
+                  },
+                  "selector":".active_category_background_blue",
+                  "features":[  
+
+                  ],
+                  "required":true
+               },
+               "options":{  
+                  "skip_first":false,
+                  "skip_last":false
+               },
+               "children":{  
+                  "breadcrumb":{  
+                     "options":{  
+                        "multiple":true,
+                        "use_content":true
+                     },
+                     "selector":">A ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "breadcrumb-last":{  
+
+                  }
+               },
+               "selector":"DIV.path ",
+               "features":[  
+
+               ],
+               "required":true
+            },
+            "language":{  
+               "selector":".menu_prod__title",
+               "options":{  
+                  "map":{  
+                     "Продукты<b></b>":"ru",
+                     "Tooted<b></b>":"et",
+                     "Products<b></b>":"en",
+                     "":"et"
+                  }
+               },
+               "required":true
+            }
+         },
+         "required":true
+      }
+   },
+   "url":"http://www.onoff.ee/",
+   "canonical":"",
+   "enabled":true,
+   "version":42,
+   "template":"456121091110121197910879",
+   "has_microdata":false
+}

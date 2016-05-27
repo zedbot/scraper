@@ -1,0 +1,484 @@
+{  
+   "children":{  
+      "document":{  
+         "selector":"body",
+         "children":{  
+            "product":{  
+               "itemtype":"//schema.org/Product",
+               "options":{  
+                  "multiple":"true"
+               },
+               "children":{  
+                  "url":{  
+                     "itemprop":"url"
+                  },
+                  "name":{  
+                     "itemprop":"name",
+                     "required":true
+                  },
+                  "offer":{  
+                     "itemprop":"offers",
+                     "type":"offer",
+                     "required":true,
+                     "children":{  
+                        "availability":{  
+                           "itemprop":"availability",
+                           "required":true,
+                           "options":{  
+                              "map":{  
+                                 "In Stock":999,
+                                 "":0
+                              }
+                           }
+                        },
+                        "condition":{  
+                           "itemprop":"itemCondition"
+                        },
+                        "price":{  
+                           "itemprop":"price",
+                           "required":true
+                        },
+                        "currency":{  
+                           "itemprop":"priceCurrency",
+                           "required":true
+                        },
+                        "valid-until":{  
+                           "itemprop":"priceValidUntil",
+                           "required":true
+                        },
+                        "itemOffered":{  
+                           "type":"product"
+                        },
+                        "rating":{  
+                           "itemtype":"rating",
+                           "type":"rating"
+                        }
+                     },
+                     "itemtype":"//schema.org/Offer"
+                  },
+                  "short_description":{  
+
+                  },
+                  "description":{  
+                     "itemprop":"description",
+                     "required":true
+                  },
+                  "sku":{  
+                     "itemprop":"sku"
+                  },
+                  "code":{  
+                     "itemprop":"mpn",
+                     "required":true
+                  },
+                  "model":{  
+                     "itemprop":"model"
+                  },
+                  "ean":{  
+                     "itemprop":"gtin13",
+                     "required":true
+                  },
+                  "color":{  
+                     "itemprop":"color"
+                  },
+                  "audience":{  
+                     "itemprop":"audience"
+                  },
+                  "category":{  
+                     "category":"category"
+                  },
+                  "manufacturer":{  
+                     "itemprop":"brand",
+                     "required":true
+                  },
+                  "manufacturer_logo":{  
+                     "itemprop":"logo",
+                     "selector":">DIV.product-pic-info >DIV#product-data >DIV.product-info >DIV.product-title-company >DIV.sku-logo >IMG.logo ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "main_image":{  
+                     "itemprop":"image",
+                     "required":true,
+                     "selector":">DIV.product-pic-info >DIV.product-pic >DIV#main-product-img >A.fancybox-trigger ",
+                     "features":[  
+
+                     ]
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "productID":{  
+                     "itemprop":"productID"
+                  },
+                  "rating":{  
+                     "type":"rating",
+                     "itemprop":"aggregateRating"
+                  },
+                  "additional_image":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "selector":">DIV.product-pic-info >DIV.product-pic >DIV.pics-extra-info >DIV.tabs-wrapper >DIV.pics-tabs >DIV.tab-content >DIV#camera-pictures >DIV.camera-pictures >DIV.item  > A ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "price":{  
+
+                  },
+                  "regular_price":{  
+                     "selector":">SPAN.price3 ",
+                     "features":[  
+
+                     ]
+                  },
+                  "price_in_strore":{  
+
+                  },
+                  "currency":{  
+
+                  },
+                  "stock_amount":{  
+
+                  },
+                  "attribute_group":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "attribute_group_name":{  
+                           "selector":">DIV.comparing-row >DIV.comparing-title  > H2 ",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        },
+                        "attribute":{  
+                           "options":{  
+                              "multiple":true
+                           },
+                           "children":{  
+                              "attribute_name":{  
+                                 "selector":">DIV.attribute-name  > SPAN ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_value":{  
+                                 "selector":">DIV.attribute-value  > SPAN ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_unit":{  
+
+                              }
+                           },
+                           "selector":">DIV ",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        }
+                     },
+                     "selector":">DIV.product-data-wrapper >DIV.product-data-nav >DIV.tab-content >DIV#specifics ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "store":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "store_name":{  
+                           "selector":".",
+                           "options":{  
+                              "regex":"([^:]*):"
+                           },
+                           "required":true
+                        },
+                        "store_price":{  
+
+                        },
+                        "store_stock_amount":{  
+
+                        },
+                        "store_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":999
+                           },
+                           "selector":".",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        },
+                        "store_not_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":0
+                           }
+                        }
+                     },
+                     "selector":">DIV.product-data-wrapper >DIV.product-data-nav >DIV.tab-content >DIV#stock >DIV.col-sm-12 >DIV.shadow1 >DIV.row >DIV.col-md-8 b",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "related":{  
+                     "itemprop":"isRelatedTo",
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "sub_products":{  
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "review":{  
+                     "itemprop":"review",
+                     "type":"review",
+                     "options":{  
+                        "multiple":true
+                     }
+                  }
+               },
+               "required":true
+            },
+            "offer":{  
+               "itemtype":"//schema.org/Offer",
+               "options":{  
+
+               },
+               "children":{  
+                  "availability":{  
+                     "itemprop":"availability",
+                     "options":{  
+                        "map":{  
+                           "In Stock":1,
+                           "":0
+                        }
+                     }
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "price":{  
+                     "itemprop":"price"
+                  },
+                  "currency":{  
+                     "itemprop":"priceCurrency"
+                  },
+                  "valid-until":{  
+                     "itemprop":"priceValidUntil"
+                  },
+                  "itemOffered":{  
+                     "type":"product"
+                  },
+                  "rating":{  
+                     "itemtype":"rating",
+                     "type":"rating"
+                  }
+               }
+            },
+            "breadcrumb":{  
+               "itemtype":"http://data-vocabulary.org/Breadcrumb",
+               "children":{  
+                  "url":{  
+                     "itemprop":"url",
+                     "selector":"@href"
+                  },
+                  "title":{  
+                     "itemprop":"title",
+                     "selector":".",
+                     "required":true
+                  }
+               },
+               "options":{  
+                  "multiple":true,
+                  "skip_first":true
+               },
+               "selector":">DIV#content >DIV.relative-wrapper >DIV.breadcrumbs >DIV.container >A ",
+               "features":[  
+
+               ],
+               "required":true
+            },
+            "rating":{  
+               "itemtype":"//schema.org/AggregateRating",
+               "options":{  
+
+               },
+               "children":{  
+                  "ratingValue":{  
+                     "itemprop":"ratingValue"
+                  },
+                  "reviewCount":{  
+                     "itemprop":"reviewCount"
+                  },
+                  "bestRating":{  
+                     "itemprop":"bestRating"
+                  },
+                  "worstRating":{  
+                     "itemprop":"worstRating"
+                  },
+                  "itemReviewed":{  
+                     "type":"product"
+                  }
+               }
+            },
+            "review":{  
+               "itemtype":"//schema.org/Review",
+               "options":{  
+
+               },
+               "children":{  
+                  "author":{  
+                     "itemprop":"author"
+                  },
+                  "date":{  
+                     "itemprop":"datePublished"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "rating":{  
+                     "itemprop":"reviewRating",
+                     "type":"rating"
+                  },
+                  "reviewBody":{  
+                     "itemprop":"reviewBody"
+                  }
+               }
+            },
+            "localbusiness":{  
+               "itemtype":"http://schema.org/LocalBusiness",
+               "options":{  
+                  "multiple":true
+               },
+               "children":{  
+                  "name":{  
+                     "itemprop":"name"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "image":{  
+                     "itemprop":"image"
+                  },
+                  "location":{  
+                     "itemprop":"geo",
+                     "type":"location"
+                  },
+                  "address":{  
+                     "itemprop":"address",
+                     "features":[  
+
+                     ]
+                  },
+                  "open":{  
+                     "itemprop":"openingHours",
+                     "features":[  
+
+                     ]
+                  },
+                  "phone":{  
+                     "itemprop":"phone"
+                  },
+                  "email":{  
+                     "itemprop":"email"
+                  },
+                  "closed":{  
+
+                  },
+                  "google_place":{  
+                     "features":[  
+
+                     ]
+                  }
+               }
+            },
+            "breadcrumbs":{  
+               "options":{  
+                  "skip_first":false,
+                  "skip_last":false
+               },
+               "children":{  
+                  "breadcrumb":{  
+                     "selector":">A ",
+                     "options":{  
+                        "multiple":true,
+                        "use_content":true,
+                        "skip_first":true
+                     },
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "breadcrumb-last":{  
+
+                  }
+               },
+               "selector":">DIV#content >DIV.relative-wrapper >DIV.breadcrumbs >DIV.container ",
+               "features":[  
+
+               ],
+               "required":true,
+               "breadcrumbs":{  
+                  "options":{  
+                     "skip_first":false,
+                     "skip_last":false
+                  },
+                  "children":{  
+                     "breadcrumb":{  
+                        "selector":"a",
+                        "options":{  
+                           "multiple":true,
+                           "use_content":true
+                        }
+                     },
+                     "breadcrumb-last":{  
+
+                     }
+                  },
+                  "selector":".active_category_background_blue",
+                  "features":[  
+
+                  ],
+                  "required":true
+               }
+            },
+            "language":{  
+               "selector":"'et'",
+               "options":{  
+                  "use_attribute":"lang"
+               },
+               "language":{  
+                  "selector":"@lang",
+                  "options":{  
+                     "use_attribute":"lang"
+                  }
+               }
+            }
+         },
+         "required":true
+      }
+   },
+   "enabled":true,
+   "url":"https://www.photopoint.ee/",
+   "version":44,
+   "has_microdata":true,
+}

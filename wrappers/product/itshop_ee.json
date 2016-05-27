@@ -1,0 +1,497 @@
+{  
+   "children":{  
+      "document":{  
+         "selector":"html",
+         "children":{  
+            "product":{  
+               "itemtype":"//schema.org/Product",
+               "options":{  
+                  "multiple":"true"
+               },
+               "children":{  
+                  "url":{  
+                     "itemprop":"url"
+                  },
+                  "name":{  
+                     "itemprop":"name",
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >FORM#product_addtocart_form >DIV.product-shop >H2.product-name ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "offer":{  
+                     "itemprop":"offers",
+                     "type":"offer",
+                     "selector":"#product_addtocart_form >DIV.product-shop >P.in-stock ",
+                     "features":[  
+
+                     ],
+                     "required":true,
+                     "children":{  
+                        "availability":{  
+                           "itemprop":"availability",
+                           "options":{  
+                              "map":{  
+                                 "In Stock":999,
+                                 "":0
+                              }
+                           }
+                        },
+                        "condition":{  
+                           "itemprop":"itemCondition"
+                        },
+                        "price":{  
+                           "itemprop":"price"
+                        },
+                        "currency":{  
+                           "itemprop":"priceCurrency"
+                        },
+                        "valid-until":{  
+                           "itemprop":"priceValidUntil"
+                        },
+                        "itemOffered":{  
+                           "type":"product"
+                        },
+                        "rating":{  
+                           "itemtype":"rating",
+                           "type":"rating"
+                        }
+                     },
+                     "itemtype":"//schema.org/Offer"
+                  },
+                  "short_description":{  
+
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "sku":{  
+                     "itemprop":"sku",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":": (.*)"
+                     },
+                     "required":true,
+                     "selector":"P:contains('Tootekood: '), P:contains('Артикул товара') "
+                  },
+                  "code":{  
+                     "itemprop":"mpn"
+                  },
+                  "model":{  
+                     "itemprop":"model"
+                  },
+                  "ean":{  
+                     "itemprop":"gtin13",
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >FORM#product_addtocart_form >DIV.product-shop >P:contains('EAN: ') ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":"([0-9]+)"
+                     },
+                     "required":true
+                  },
+                  "color":{  
+                     "itemprop":"color"
+                  },
+                  "audience":{  
+                     "itemprop":"audience"
+                  },
+                  "category":{  
+                     "category":"category"
+                  },
+                  "manufacturer":{  
+                     "itemprop":"brand"
+                  },
+                  "manufacturer_logo":{  
+                     "itemprop":"logo"
+                  },
+                  "main_image":{  
+                     "itemprop":"image",
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >DIV.product-img-box >DIV.yt-detail-image >DIV.product-image-zoom >DIV#wrap >A#yt_cloudzoom ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "productID":{  
+                     "itemprop":"productID"
+                  },
+                  "aggregateRating":{  
+                     "type":"rating",
+                     "itemprop":"aggregateRating"
+                  },
+                  "additional_image":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >DIV.product-img-box >DIV.more-view-wrapper >DIV.slide-gallery >DIV.jCarouselLite  > UL >LI >A.actived ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "price":{  
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >FORM#product_addtocart_form >DIV.product-shop >DIV.price-box >SPAN.special-price >SPAN.special-price ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":"([0-9.,]+)"
+                     },
+                     "required":true
+                  },
+                  "regular_price":{  
+                     "selector":">DIV.box-1 >DIV.col-xs-12 >FORM#product_addtocart_form >DIV.product-shop >DIV.price-box >SPAN.regular-price >SPAN.price ",
+                     "features":[  
+
+                     ],
+                     "options":{  
+                        "regex":"([0-9.,]+)"
+                     },
+                     "required":true
+                  },
+                  "price_in_strore":{  
+
+                  },
+                  "currency":{  
+
+                  },
+                  "stock_amount":{  
+
+                  },
+                  "in_stock":{  
+                     "options":{  
+                        "use_contains":true,
+                        "value":999
+                     },
+                     "selector":"#product_addtocart_form >DIV.product-shop >P.in-stock ",
+                     "required":true
+                  },
+                  "not_in_stock":{  
+                     "options":{  
+                        "use_contains":true
+                     }
+                  },
+                  "attribute_group":{  
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "attribute_group_name":{  
+
+                        },
+                        "attribute":{  
+                           "options":{  
+                              "multiple":true
+                           },
+                           "children":{  
+                              "attribute_name":{  
+                                 "selector":">TD.label ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_value":{  
+                                 "selector":">TD.value ",
+                                 "features":[  
+
+                                 ],
+                                 "required":true
+                              },
+                              "attribute_unit":{  
+
+                              }
+                           },
+                           "selector":" > TBODY >TR ",
+                           "features":[  
+
+                           ],
+                           "required":true
+                        }
+                     },
+                     "selector":">DIV.box-1 >DIV#yt_tab_products >DIV.tab-content >DIV#yt_tab_decription >DIV.std >TABLE.description-table ",
+                     "features":[  
+
+                     ],
+                     "required":true
+                  },
+                  "store":{  
+                     "type":"store",
+                     "options":{  
+                        "multiple":true
+                     },
+                     "children":{  
+                        "store_name":{  
+
+                        },
+                        "store_price":{  
+
+                        },
+                        "store_stock_amount":{  
+
+                        },
+                        "store_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":999
+                           }
+                        },
+                        "store_not_in_stock":{  
+                           "options":{  
+                              "use_contains":true,
+                              "value":0
+                           }
+                        }
+                     }
+                  },
+                  "related":{  
+                     "itemprop":"isRelatedTo",
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "sub_products":{  
+                     "type":"product",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "review":{  
+                     "itemprop":"review",
+                     "type":"review",
+                     "options":{  
+                        "multiple":true
+                     }
+                  },
+                  "rating":{  
+                     "type":"rating",
+                     "itemprop":"aggregateRating"
+                  }
+               },
+               "selector":">BODY#bd >DIV#yt_wrapper >DIV#yt_content >DIV#yt_main >DIV.container >DIV.row >DIV.col-md-12 >DIV.yt-product-detail >DIV.yt-product-detail-inner >DIV.product-essential ",
+               "features":[  
+
+               ],
+               "required":true
+            },
+            "offer":{  
+               "itemtype":"//schema.org/Offer",
+               "options":{  
+
+               },
+               "children":{  
+                  "availability":{  
+                     "itemprop":"availability",
+                     "options":{  
+                        "map":{  
+                           "In Stock":999,
+                           "":0
+                        }
+                     }
+                  },
+                  "condition":{  
+                     "itemprop":"itemCondition"
+                  },
+                  "price":{  
+                     "itemprop":"price"
+                  },
+                  "currency":{  
+                     "itemprop":"priceCurrency"
+                  },
+                  "valid-until":{  
+                     "itemprop":"priceValidUntil"
+                  },
+                  "itemOffered":{  
+                     "type":"product"
+                  },
+                  "rating":{  
+                     "itemtype":"rating",
+                     "type":"rating"
+                  }
+               }
+            },
+            "breadcrumb":{  
+               "itemtype":"http://data-vocabulary.org/Breadcrumb",
+               "children":{  
+                  "url":{  
+                     "itemprop":"url"
+                  },
+                  "title":{  
+                     "itemprop":"title"
+                  }
+               },
+               "options":{  
+                  "multiple":true
+               }
+            },
+            "rating":{  
+               "itemtype":"//schema.org/AggregateRating",
+               "options":{  
+
+               },
+               "children":{  
+                  "ratingValue":{  
+                     "itemprop":"ratingValue"
+                  },
+                  "reviewCount":{  
+                     "itemprop":"reviewCount"
+                  },
+                  "bestRating":{  
+                     "itemprop":"bestRating"
+                  },
+                  "worstRating":{  
+                     "itemprop":"worstRating"
+                  },
+                  "itemReviewed":{  
+                     "type":"product"
+                  }
+               }
+            },
+            "review":{  
+               "itemtype":"//schema.org/Review",
+               "options":{  
+
+               },
+               "children":{  
+                  "author":{  
+                     "itemprop":"author"
+                  },
+                  "date":{  
+                     "itemprop":"datePublished"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "rating":{  
+                     "itemprop":"reviewRating",
+                     "type":"rating"
+                  },
+                  "reviewBody":{  
+                     "itemprop":"reviewBody"
+                  }
+               }
+            },
+            "localbusiness":{  
+               "itemtype":"http://schema.org/LocalBusiness",
+               "options":{  
+                  "multiple":true
+               },
+               "children":{  
+                  "name":{  
+                     "itemprop":"name"
+                  },
+                  "description":{  
+                     "itemprop":"description"
+                  },
+                  "image":{  
+                     "itemprop":"image"
+                  },
+                  "location":{  
+                     "itemprop":"geo",
+                     "type":"location"
+                  },
+                  "address":{  
+                     "itemprop":"address",
+                     "features":[  
+
+                     ]
+                  },
+                  "open":{  
+                     "itemprop":"openingHours",
+                     "features":[  
+
+                     ]
+                  },
+                  "phone":{  
+                     "itemprop":"phone"
+                  },
+                  "email":{  
+                     "itemprop":"email"
+                  },
+                  "closed":{  
+
+                  },
+                  "google_place":{  
+                     "features":[  
+
+                     ]
+                  }
+               }
+            },
+            "breadcrumbs":{  
+               "options":{  
+                  "skip_first":true,
+                  "skip_last":false
+               },
+               "children":{  
+                  "breadcrumb":{  
+                     "selector":"a",
+                     "options":{  
+                        "multiple":true,
+                        "use_content":true,
+                        "skip_first":true
+                     },
+                     "required":true
+                  },
+                  "breadcrumb-last":{  
+
+                  }
+               },
+               "selector":">BODY#bd >DIV#yt_wrapper >DIV#yt_content >DIV#yt_main >DIV.yt-breadcrumbs >DIV.container >DIV.row >DIV.col-md-12  > UL ",
+               "features":[  
+
+               ],
+               "required":true
+            },
+            "language":{  
+               "selector":"@lang",
+               "options":{  
+
+               }
+            },
+            "store":{  
+               "options":{  
+                  "multiple":true
+               },
+               "children":{  
+                  "store_name":{  
+
+                  },
+                  "store_price":{  
+
+                  },
+                  "store_stock_amount":{  
+
+                  },
+                  "store_in_stock":{  
+                     "options":{  
+                        "use_contains":true,
+                        "value":999
+                     }
+                  },
+                  "store_not_in_stock":{  
+                     "options":{  
+                        "use_contains":true,
+                        "value":0
+                     }
+                  }
+               }
+            }
+         },
+         "required":true
+      }
+   },
+   "enabled":true,
+   "url":"https://www.itshop.ee/",
+   "has_microdata":false,
+   "version":23
+}
