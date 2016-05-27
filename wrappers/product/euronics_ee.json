@@ -1,0 +1,546 @@
+{
+  "children": {
+    "document": {
+      "selector": "html",
+      "children": {
+        "product": {
+          "itemtype": "//schema.org/Product",
+          "options": {
+            "multiple": "true"
+          },
+          "children": {
+            "url": {
+              "itemprop": "url"
+            },
+            "name": {
+              "itemprop": "name",
+              "selector": "DIV.oi-main-article-header > H1",
+              "required": true
+            },
+            "offer": {
+              "itemprop": "offers",
+              "type": "offer"
+            },
+            "short_description": {
+              "selector": "DIV.oi-section-product-card.clear > DIV.colr > DIV.oi-product-description > DIV.oi-row.oi-description > div:nth-child(3) p",
+              "required": true
+            },
+            "description": {
+              "itemprop": "description",
+              "selector": "DIV.oi-section-product-data.clear > DIV.product-data-article-container > DIV.product-data-article.item-1 > P",
+              "required": true
+            },
+            "sku": {
+              "itemprop": "sku",
+              "selector": "DIV.oi-main-article-header > P.productID > SPAN",
+              "required": true
+            },
+            "code": {
+              "itemprop": "mpn",
+              "selector": "DIV.oi-main-article-header > P.productID > SPAN",
+              "required": true
+            },
+            "model": {
+              "itemprop": "model"
+            },
+            "ean": {
+              "itemprop": "gtin13"
+            },
+            "color": {
+              "itemprop": "color"
+            },
+            "audience": {
+              "itemprop": "audience"
+            },
+            "category": {
+              "category": "category"
+            },
+            "manufacturer": {
+              "itemprop": "brand",
+              "selector": "TR:contains(tootja:) > TD:nth-child(2) ",
+              "required": true
+            },
+            "manufacturer_logo": {
+              "itemprop": "logo"
+            },
+            "main_image": {
+              "itemprop": "image",
+              "selector": "DIV.oi-section-product-card.clear > DIV.col.oi-product-media > P.thumb > A",
+              "required": true
+            },
+            "condition": {
+              "itemprop": "itemCondition"
+            },
+            "productID": {
+              "itemprop": "productID",
+              "required": true
+            },
+            "aggregateRating": {
+              "type": "rating",
+              "itemprop": "aggregateRating",
+              "required": true,
+              "children": {
+                "ratingValue": {
+                  "itemprop": "ratingValue",
+                  "required": true
+                },
+                "reviewCount": {
+                  "itemprop": "reviewCount",
+                  "required": true
+                },
+                "bestRating": {
+                  "itemprop": "bestRating",
+                  "required": true
+                },
+                "worstRating": {
+                  "itemprop": "worstRating",
+                  "required": true
+                },
+                "itemReviewed": {
+                  "type": "product"
+                }
+              },
+              "itemtype": "//schema.org/AggregateRating"
+            },
+            "additional_image": {
+              "options": {
+                "multiple": true
+              }
+            },
+            "price": {
+              "selector": "DIV.oi-section-product-card.clear > DIV.colr > DIV.oi-product-description > DIV.oi-bottom.clear > UL.oi-list > LI.oi-col-2 > P.price",
+              "options": {
+                "usecontent": 1,
+                "regex": "([0-9.]+)"
+              },
+              "required": true
+            },
+            "regular_price": {},
+            "price_in_strore": {},
+            "currency": {
+              "selector": "'EUR'"
+            },
+            "stock_amount": {},
+            "in_stock": {
+              "options": {
+                "use_contains": true
+              }
+            },
+            "not_in_stock": {
+              "options": {
+                "use_contains": true
+              }
+            },
+            "attribute_group": {
+              "options": {
+                "multiple": true
+              },
+              "children": {
+                "attribute_group_name": {},
+                "attribute": {
+                  "options": {
+                    "multiple": true
+                  },
+                  "children": {
+                    "attribute_name": {},
+                    "attribute_value": {},
+                    "attribute_unit": {}
+                  }
+                }
+              }
+            },
+            "store": {
+              "type": "store",
+              "multiple": true,
+              "options": {
+                "multiple": true
+              },
+              "children": {
+                "store_name": {
+                  "selector": "@data-id",
+                  "options": {
+                    "multiple": true
+                  }
+                },
+                "store_in_stock": {
+                  "options": {
+                    "multiple": true
+                  },
+                  "multiple": true,
+                  "selector": "'999'",
+                  "required": true
+                }
+              },
+              "selector": "DIV.oi-section-product-data.clear > DIV.product-data-article-container > DIV.product-data-article.item-5 > TABLE.ProductCardGoogleTable > TBODY > TR > TD.left > UL.oi-list LI.cursor",
+              "required": true
+            },
+            "related": {
+              "itemprop": "isRelatedTo",
+              "type": "product",
+              "options": {
+                "multiple": true
+              }
+            },
+            "sub_products": {
+              "type": "product",
+              "options": {
+                "multiple": true
+              }
+            },
+            "review": {
+              "itemprop": "review",
+              "type": "review",
+              "options": {
+                "multiple": true
+              },
+              "required": true,
+              "children": {
+                "author": {
+                  "itemprop": "author",
+                  "required": true
+                },
+                "date": {
+                  "itemprop": "datePublished",
+                  "required": true
+                },
+                "description": {
+                  "itemprop": "description",
+                  "required": true
+                },
+                "rating": {
+                  "itemprop": "reviewRating",
+                  "type": "rating",
+                  "required": true,
+                  "children": {
+                    "ratingValue": {
+                      "itemprop": "ratingValue",
+                      "required": true
+                    },
+                    "reviewCount": {
+                      "itemprop": "reviewCount"
+                    },
+                    "bestRating": {
+                      "itemprop": "bestRating"
+                    },
+                    "worstRating": {
+                      "itemprop": "worstRating"
+                    },
+                    "itemReviewed": {
+                      "type": "product"
+                    }
+                  },
+                  "itemtype": "//schema.org/AggregateRating"
+                },
+                "reviewBody": {
+                  "itemprop": "reviewBody"
+                }
+              },
+              "itemtype": "//schema.org/Review"
+            },
+            "discount_price": {
+              "selector": "SPAN.new-price ",
+              "features": [],
+              "required": true,
+              "options": {
+                "regex": "([0-9.]+)"
+              }
+            },
+            "additional_images": {
+              "children": {
+                "additional_image": {
+                  "options": {
+                    "multiple": true
+                  },
+                  "multiple": true,
+                  "selector": "LI.oi-pager-item > A",
+                  "required": true
+                }
+              },
+              "selector": "DIV.oi-section-product-card.clear > DIV.col.oi-product-media > DIV.oi-media-pager.clear > DIV.oi-viewport-media > OL.oi-list.oi-media-pager-list",
+              "required": true
+            },
+            "attribute_groups": {
+              "children": {
+                "attribute_group": {
+                  "options": {
+                    "multiple": true
+                  },
+                  "children": {
+                    "attribute_group_name": {
+                      "selector": "THEAD > TR > TH",
+                      "required": true
+                    },
+                    "attributes": {
+                      "children": {
+                        "attribute": {
+                          "options": {
+                            "multiple": true
+                          },
+                          "children": {
+                            "attribute_name": {
+                              "selector": "TH",
+                              "required": true,
+                              "options": {
+                                "textify": true,
+                                "index": 1
+                              }
+                            },
+                            "attribute_value": {
+                              "selector": "TD",
+                              "required": true,
+                              "options": {
+                                "regex": "([^<]+)"
+                              }
+                            },
+                            "attribute_unit": {}
+                          },
+                          "multiple": true,
+                          "selector": "TR",
+                          "required": true
+                        }
+                      },
+                      "selector": "TBODY",
+                      "required": true
+                    }
+                  },
+                  "multiple": true,
+                  "selector": "DIV.oi-product-details > TABLE.oi-table-formatted",
+                  "required": true
+                }
+              },
+              "selector": "DIV.oi-section-product-data.clear > DIV.product-data-article-container > DIV.product-data-article.item-2",
+              "required": true
+            },
+            "sub_product": {},
+            "reviews": {
+              "children": {
+                "review": {
+                  "options": {
+                    "multiple": true
+                  },
+                  "children": {
+                    "ranking": {
+                      "selector": "SPAN.hidden ",
+                      "features": [],
+                      "required": true
+                    },
+                    "author": {
+                      "selector": "P.name ",
+                      "features": [],
+                      "required": true
+                    },
+                    "date": {
+                      "selector": "P.date ",
+                      "features": [],
+                      "required": true
+                    },
+                    "message": {
+                      "selector": "DIV.article P ",
+                      "features": [],
+                      "required": true
+                    },
+                    "title": {}
+                  },
+                  "selector": ">LI ",
+                  "features": [],
+                  "required": true
+                }
+              },
+              "selector": "DIV.item-7 UL.oi-comments-list ",
+              "features": [],
+              "required": true
+            }
+          },
+          "selector": "BODY DIV[itemtype='http://schema.org/Product']",
+          "required": true
+        },
+        "offer": {
+          "itemtype": "//schema.org/Offer",
+          "options": {},
+          "children": {
+            "availability": {
+              "itemprop": "availability",
+              "options": {
+                "map": {
+                  "In Stock": 999,
+                  "": 0
+                }
+              }
+            },
+            "condition": {
+              "itemprop": "itemCondition"
+            },
+            "price": {
+              "itemprop": "price"
+            },
+            "currency": {
+              "itemprop": "priceCurrency"
+            },
+            "valid-until": {
+              "itemprop": "priceValidUntil"
+            },
+            "itemOffered": {
+              "type": "product"
+            },
+            "rating": {
+              "itemtype": "rating",
+              "type": "rating"
+            }
+          }
+        },
+        "breadcrumb": {
+          "itemtype": "http://data-vocabulary.org/Breadcrumb",
+          "children": {
+            "url": {
+              "itemprop": "url",
+              "required": true
+            },
+            "title": {
+              "itemprop": "title",
+              "required": true
+            }
+          },
+          "options": {
+            "multiple": true
+          },
+          "required": true
+        },
+        "rating": {
+          "itemtype": "//schema.org/AggregateRating",
+          "options": {},
+          "children": {
+            "ratingValue": {
+              "itemprop": "ratingValue"
+            },
+            "reviewCount": {
+              "itemprop": "reviewCount"
+            },
+            "bestRating": {
+              "itemprop": "bestRating"
+            },
+            "worstRating": {
+              "itemprop": "worstRating"
+            },
+            "itemReviewed": {
+              "type": "product"
+            }
+          }
+        },
+        "review": {
+          "itemtype": "//schema.org/Review",
+          "options": {},
+          "children": {
+            "author": {
+              "itemprop": "author"
+            },
+            "date": {
+              "itemprop": "datePublished"
+            },
+            "description": {
+              "itemprop": "description"
+            },
+            "rating": {
+              "itemprop": "reviewRating",
+              "type": "rating"
+            },
+            "reviewBody": {
+              "itemprop": "reviewBody"
+            }
+          }
+        },
+        "localbusiness": {
+          "itemtype": "http://schema.org/LocalBusiness",
+          "options": {
+            "multiple": true
+          },
+          "children": {
+            "name": {
+              "itemprop": "name"
+            },
+            "description": {
+              "itemprop": "description"
+            },
+            "image": {
+              "itemprop": "image"
+            },
+            "location": {
+              "itemprop": "geo",
+              "type": "location"
+            },
+            "address": {
+              "itemprop": "address",
+              "features": []
+            },
+            "open": {
+              "itemprop": "openingHours",
+              "features": []
+            },
+            "phone": {
+              "itemprop": "phone"
+            },
+            "email": {
+              "itemprop": "email"
+            },
+            "closed": {},
+            "google_place": {
+              "features": []
+            }
+          }
+        },
+        "breadcrumbs": {
+          "options": {
+            "skip_first": false,
+            "skip_last": false
+          },
+          "children": {
+            "breadcrumb": {
+              "selector": "DIV > A > SPAN",
+              "options": {
+                "multiple": true,
+                "use_content": true
+              },
+              "multiple": true,
+              "required": true
+            },
+            "breadcrumb-last": {}
+          },
+          "selector": "BODY > FORM > DIV.oi-section-wrap > DIV.oi-section-main-content.clear > DIV > DIV.oi-main-article-header > DIV.oi-section-breadcrumbs",
+          "features": [],
+          "required": true
+        },
+        "language": {
+          "selector": "@lang",
+          "options": {},
+          "required": true
+        },
+        "store": {
+          "options": {
+            "multiple": true
+          },
+          "children": {
+            "store_name": {},
+            "store_price": {},
+            "store_stock_amount": {},
+            "store_in_stock": {
+              "options": {
+                "use_contains": true,
+                "value": 999
+              }
+            },
+            "store_not_in_stock": {
+              "options": {
+                "use_contains": true,
+                "value": 0
+              }
+            }
+          }
+        }
+      },
+      "required": true
+    }
+  },
+  "url": "http://www.euronics.ee/",
+  "canonical": "http://www.euronics.ee",
+  "version": 28,
+  "has_microdata": true
+}
