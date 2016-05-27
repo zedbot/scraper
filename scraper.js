@@ -10646,13 +10646,14 @@ if($("#zedbot_scraper").length > 0) {
     localStorage.setItem("zedbot_script", window.zedbot_script);
     localStorage.setItem("zedbot_scraper", window.zedbot_base);
     localStorage.setItem("zedbot_mode", "iframe");
-    localStorage.setItem("zedbot_dataset", conf.dataset || "");
+	if(conf.dataset !== undefined)
+		localStorage.setItem("zedbot_dataset", conf.dataset || "");
     localStorage.setItem("zedbot_endpoint_url", conf.endpoint || "");
     
     require('./loader.js')(window.zedbot_script );
       
   } else if(mode == "iframe") {
-    require('./specs.js')(window.zedbot_base, function(specs){
+    require('./specs.js')(window.zedbot_base, localStorage.getItem("zedbot_dataset"), window.zedbot_site, function(specs){
       require('./annotator.js')(specs);
     });
   }
@@ -10796,16 +10797,28 @@ var jq = require('jquery');
 
 module.exports = generateSelector;
 },{"jquery":2}],11:[function(require,module,exports){
-loadSpecs = function(baseurl, callback){
+loadSpecs = function(baseurl, dataset, site, callback){
   var jq = require('jquery');
-  
+
   jq.getScript(baseurl + "/specs/load.js", function( data, textStatus, jqxhr ) {
     zedbot_loadspecs(jq, baseurl+"/specs/", function(default_specs){
 	  var localSpecs = localStorage.getItem("zedbot_wrapper");
-	  localSpecs = localSpecs == null ? {} : JSON.parse(localSpecs);
-	  zedbot_specs = jq.extend(true, {}, default_specs, localSpecs);
-	  console.log("specs", zedbot_specs);
-      callback(zedbot_specs);
+	  console.log("localSpecs", localSpecs)
+	  if (localSpecs == null) {
+		  jq.getJSON(baseurl + "/wrappers/"+dataset+"/"+site+".json", function( site_specs, textStatus, jqxhr ) {
+			  console.log("site_specs", site_specs, textStatus, jqxhr);
+			  var zedbot_specs = jq.extend(true, {}, default_specs, site_specs);
+			  console.log("specs", zedbot_specs);
+			  callback(zedbot_specs);
+		  }).fail(function() {
+			console.log("fail, specs", zedbot_specs);
+			callback(default_specs);
+		  });
+	  } else {
+		  var zedbot_specs = jq.extend(true, {}, default_specs, JSON.parse(localSpecs));
+		  console.log("specs", zedbot_specs);
+		  callback(zedbot_specs);
+	  }
     });
   })
   /*

@@ -1,13 +1,25 @@
-loadSpecs = function(baseurl, callback){
+loadSpecs = function(baseurl, dataset, site, callback){
   var jq = require('jquery');
-  
+
   jq.getScript(baseurl + "/specs/load.js", function( data, textStatus, jqxhr ) {
     zedbot_loadspecs(jq, baseurl+"/specs/", function(default_specs){
 	  var localSpecs = localStorage.getItem("zedbot_wrapper");
-	  localSpecs = localSpecs == null ? {} : JSON.parse(localSpecs);
-	  zedbot_specs = jq.extend(true, {}, default_specs, localSpecs);
-	  console.log("specs", zedbot_specs);
-      callback(zedbot_specs);
+	  console.log("localSpecs", localSpecs)
+	  if (localSpecs == null) {
+		  jq.getJSON(baseurl + "/wrappers/"+dataset+"/"+site+".json", function( site_specs, textStatus, jqxhr ) {
+			  console.log("site_specs", site_specs, textStatus, jqxhr);
+			  var zedbot_specs = jq.extend(true, {}, default_specs, site_specs);
+			  console.log("specs", zedbot_specs);
+			  callback(zedbot_specs);
+		  }).fail(function() {
+			console.log("fail, specs", zedbot_specs);
+			callback(default_specs);
+		  });
+	  } else {
+		  var zedbot_specs = jq.extend(true, {}, default_specs, JSON.parse(localSpecs));
+		  console.log("specs", zedbot_specs);
+		  callback(zedbot_specs);
+	  }
     });
   })
   /*

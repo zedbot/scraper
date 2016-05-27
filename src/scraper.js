@@ -19,13 +19,14 @@ if($("#zedbot_scraper").length > 0) {
     localStorage.setItem("zedbot_script", window.zedbot_script);
     localStorage.setItem("zedbot_scraper", window.zedbot_base);
     localStorage.setItem("zedbot_mode", "iframe");
-    localStorage.setItem("zedbot_dataset", conf.dataset || "");
+	if(conf.dataset !== undefined)
+		localStorage.setItem("zedbot_dataset", conf.dataset || "");
     localStorage.setItem("zedbot_endpoint_url", conf.endpoint || "");
     
     require('./loader.js')(window.zedbot_script );
       
   } else if(mode == "iframe") {
-    require('./specs.js')(window.zedbot_base, function(specs){
+    require('./specs.js')(window.zedbot_base, localStorage.getItem("zedbot_dataset"), window.zedbot_site, function(specs){
       require('./annotator.js')(specs);
     });
   }
