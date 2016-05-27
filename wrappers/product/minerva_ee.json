@@ -385,8 +385,14 @@
           "required": true
         },
         "language": {
-          "selector": "@lang",
-          "options": {}
+          "selector": ".first_topmenu a span",
+          "options": {
+            "map": {
+              "About Us": "en",
+              "": "et"
+            }
+          },
+          "required": true
         },
         "store": {
           "options": {
@@ -416,6 +422,7 @@
   },
   "enabled": true,
   "url": "http://www.minerva.ee/epood/",
-  "version": 16,
+  "version": 18,
+  "template": "141222232425262530307",
   "has_microdata": false
 }
