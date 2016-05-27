@@ -40,11 +40,11 @@ var DomUtils = {
 		} else if(node.nodeName == "A") {
 			var href = jq(node).get(0).href;
 			href = jq("<a href='"+href+"'/>").get(0).href; // get full url
-			if(specs.session_name != undefined) {
+			//if(specs.session_name != undefined) {
 				//console.log(">>>>>>>", specs.session_name, "/&"+specs.session_name+"=[^&]+/gmi")
-				href = href.replace(new RegExp("&abcantenn=[^&]+"), "");
+			//	href = href.replace(new RegExp("&abcantenn=[^&]+"), "");
 				//console.log(href);
-			}
+			//}
 			return href;
 		} else if(node.nodeName == "LINK") {
 			return jq(node).attr("href");

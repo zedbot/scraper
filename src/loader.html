@@ -32,7 +32,7 @@
     <body>
       <div id="zedbot_panel" style="height:7%"> 
        <div class="block scrape_mode">Dataset name:
-        <input id="zedbot_mode"></input>
+        <input id="zedbot_dataset"></input>
         <br>Dataset URL:
         <input id="zedbot_endpoint" size="30" value="http://localhost:9200/pages/product/">  <input type="button" id="zedbot_set_mode" value="Go">
         </div>
@@ -42,6 +42,8 @@
       <iframe width="100%" height="93%" id="zedbot_page" sandbox="allow-same-origin allow-scripts"></iframe>
     </body>
     <script>
+		dataset = localStorage.getItem("zedbot_dataset") || "";
+		document.getElementById("zedbot_dataset").value = dataset;
         console.log("localStorage",localStorage.getItem("zedbot_scraper"))
             
 			var iframe = document.getElementById("zedbot_page");
@@ -61,18 +63,17 @@
 				if(dataset != null) {
 					var script = document.createElement( 'script' );
 					script.type = 'text/javascript';
-					script.src = localStorage.getItem("zedbot_scraper") + new Date().getTime();
-          script.id = "zedbot_scraper";
-					script.setAttribute('data-mode', mode);
-					script.setAttribute('data-dataset',dataset);
-					script.setAttribute('data-endpoint',endpoint);
+					script.src = localStorage.getItem("zedbot_script") + new Date().getTime();
+					script.id = "zedbot_scraper";
+					script.setAttribute('data-mode', "iframe");
 					iframe.contentWindow.document.getElementsByTagName('head')[0].appendChild(script);
         }
       });
             
 			document.getElementById("zedbot_set_mode").addEventListener("click", function(e){
 				e.preventDefault();
-				dataset = document.getElementById("zedbot_mode").value;
+				dataset = document.getElementById("zedbot_dataset").value;
+				localStorage.setItem("zedbot_dataset", dataset)
 				iframe.contentWindow.location.reload();
 			});
       

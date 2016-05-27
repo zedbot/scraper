@@ -224,7 +224,7 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
 
           var a = document.createElement('a');
           a.href = oURL;
-          a.setAttribute('download', localStorage.getItem("zedbot_dataset")/*TODO: +site_id */+".json");
+          a.setAttribute('download', localStorage.getItem("zedbot_dataset")+"_"+window.zedbot_site+".json");
           a.click();
           URL.revokeObjectURL(oURL);
         
@@ -238,17 +238,26 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
       .append(jq("<br>"))
       .append(jq("<button id='zedbot_save'>save script</button>").click(function(){
           //extractFieldBySelector(specs, jq("html"), product);
-          saveScript();        
+          //saveScript();        
+		  localStorage.setItem('zedbot_wrapper',  JSON.stringify(specs));
+
       }))
       .append(jq("<br>"))
       .append(jq("<button id='zedbot_save'>download script</button>").click(function(){
           //extractFieldBySelector(specs, jq("html"), product);
           //downloadScript();       
           var blob = new Blob(
-          [JSON.stringify(specs, null, 2)],
-          {type: 'application/json;charset=utf-8'}
-      );          
-      }))
+			[JSON.stringify(specs, null, 2)],
+			{type: 'application/json;charset=utf-8'}
+		  );
+		   var oURL = URL.createObjectURL(blob);
+
+          var a = document.createElement('a');
+          a.href = oURL;
+          a.setAttribute('download', localStorage.getItem("zedbot_dataset")+"_"+window.zedbot_site+"_wrapper.json");
+          a.click();
+          URL.revokeObjectURL(oURL);
+        }))
       
 	  /*
       .append(jq("<br>"))
@@ -270,7 +279,12 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
     //getStats(".zedbot_parser");
 
     jq('<div/>')
-      .click(function(e){if(e.target == this) jq(this).hide()})
+      .click(function(e){
+		  if(e.target == this) {
+			  jq(this).hide();
+			  localStorage.setItem('zedbot_wrapper',  JSON.stringify(specs)); // save specs
+		  }
+		})
       .addClass("zedbot_tester")
       .appendTo("body")
     
@@ -412,6 +426,8 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
 		}
 			
         jq(".zedbot_classifier").hide();
+		localStorage.setItem('zedbot_wrapper',  JSON.stringify(specs)); // save specs
+
         
     });
     jq(document).on("click", ".zedbot_ignore_url,.zedbot_boost_url", function(e){
@@ -421,6 +437,8 @@ function printSpecs(specs, scopes, node, classifierEl, parent_scope){
 			//specs.ignore_urls = jq.unique(specs.ignore_urls);
 			jq(".zedbot_classifier").hide();
     });	
+	
+	jq("#zedbot_test").trigger("click");
   }
   
  module.exports = loadUI

@@ -1,7 +1,6 @@
 "use strict";
 var replace = function(script){
   console.log("script",script);
-  var _script = script;
   var html = require('./loader.html');
 
   document.open();

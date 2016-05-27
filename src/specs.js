@@ -2,11 +2,14 @@ loadSpecs = function(baseurl, callback){
   var jq = require('jquery');
   
   jq.getScript(baseurl + "/specs/load.js", function( data, textStatus, jqxhr ) {
-    zedbot_loadspecs(jq, baseurl+"/specs/", function(zedbot_specs){
+    zedbot_loadspecs(jq, baseurl+"/specs/", function(default_specs){
+      var localSpecs = JSON.parse(localStorage.getItem("zedbot_wrapper") || {});
+	  zedbot_specs = jq.extend(true, {}, default_specs, localSpecs);
+	  console.log("specs", zedbot_specs);
       callback(zedbot_specs);
     });
   })
-  
+  /*
   var endpoint_url = localStorage.getItem("zedbot_endpoint_url");
   console.log("loadSpecs", baseurl, endpoint_url);
   return;
@@ -32,6 +35,7 @@ loadSpecs = function(baseurl, callback){
         })
       })
   })
+  */
 };
 
 module.exports = loadSpecs;
