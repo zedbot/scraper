@@ -1,6 +1,7 @@
 # zedBot scraper
 ##Usage
 Add bookmark
+
 see https://crawler.zed.ee/zedbot/scraper/
 ##build
 install nodejs
