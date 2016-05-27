@@ -3,7 +3,8 @@ loadSpecs = function(baseurl, callback){
   
   jq.getScript(baseurl + "/specs/load.js", function( data, textStatus, jqxhr ) {
     zedbot_loadspecs(jq, baseurl+"/specs/", function(default_specs){
-      var localSpecs = JSON.parse(localStorage.getItem("zedbot_wrapper") || {});
+	  var localSpecs = localStorage.getItem("zedbot_wrapper");
+	  localSpecs = localSpecs == null ? {} : JSON.parse(localSpecs);
 	  zedbot_specs = jq.extend(true, {}, default_specs, localSpecs);
 	  console.log("specs", zedbot_specs);
       callback(zedbot_specs);

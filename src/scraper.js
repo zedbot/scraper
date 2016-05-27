@@ -19,9 +19,8 @@ if($("#zedbot_scraper").length > 0) {
     localStorage.setItem("zedbot_script", window.zedbot_script);
     localStorage.setItem("zedbot_scraper", window.zedbot_base);
     localStorage.setItem("zedbot_mode", "iframe");
-    localStorage.setItem("zedbot_dataset", conf.dataset);
-    localStorage.setItem("zedbot_endpoint_url", conf.endpoint);
-    localStorage.setItem("zedbot_specs_url", conf.specs_url);
+    localStorage.setItem("zedbot_dataset", conf.dataset || "");
+    localStorage.setItem("zedbot_endpoint_url", conf.endpoint || "");
     
     require('./loader.js')(window.zedbot_script );
       

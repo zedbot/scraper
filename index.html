@@ -4,10 +4,33 @@
 	<meta charset=utf-8 />
 	<title>ZedBot scraper</title>
   <!--script src="https://crawler.zed.ee/zedbot/scraper/scraper.js" id="zedbot_scraper" data-x="aaa"></script-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
 </head>
 <body>
-	<h1 style="color:#888888">Andrese interneti indekseerija</h1>
-	<p>Probleemide korral saada kiri crawler@zed.ee</p>
-	<p>In case of problems or excessive crawling send e-mail to crawler@zed.ee</p>
+<article class="container bs-docs-container">
+	<h1>ZedBot scraper</h1>
+	<h2>Bookmark</h2>
+	<p><a href="javascript:(function(){var s=document.createElement('script');s.id='zedbot_scraper';s.setAttribute('src','https://crawler.zed.ee/zedbot/scraper/scraper.js?'+new Date().getTime());if(typeof zedBot=='undefined'){document.getElementsByTagName('head')[0].appendChild(s);}})();">ZedBot Scaper</a></p>
+	<h2 >How to use (setup)</h2>
+	<ol>
+		<li>Drag bookmark to bookmark bar</li>
+		<li>Navigate to target site</li>
+		<li>Click on bookmark</li>
+		<li>Set dataset name and click [Go]</li>	
+	</ol>
+	<h2>How to use (wrapper generation)</h2>
+	<ol>
+		<li>Select area that contains all data that needs to be extracted</li>
+		<li>Right click and select object type (annotation)</li>
+		<li>Select item inside </li>
+		<li>Right click and select object type (annotation)</li>
+		<li>Repeat ...</li>
+	</ol>
+	<h2>Get data / save wrapper</h2>
+	<ol>
+		<li>Use save / download buttons</li>
+	</ol>
+	</article>
 </body>
 </html>
